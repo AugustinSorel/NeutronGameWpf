@@ -13,7 +13,16 @@ namespace NeutronGame
         {
             InitializeComponent();
             AddInputUserContorl();
+            AddTopBarUserControl();
             FocusTextBoxPlayer1Name();
+        }
+        #endregion
+
+        #region Add TopBarUserControl
+        private void AddTopBarUserControl()
+        {
+            container.Children.Add(TopBarUserControl.Instance);
+            Grid.SetColumnSpan(TopBarUserControl.Instance, 3);
         }
         #endregion
 
