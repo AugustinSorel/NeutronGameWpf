@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace NeutronGame
@@ -9,24 +8,30 @@ namespace NeutronGame
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region ctor
         public MainWindow()
         {
             InitializeComponent();
             AddInputUserContorl();
             FocusTextBoxPlayer1Name();
         }
+        #endregion
 
+        #region Focus TextBox Player1Name
         private void FocusTextBoxPlayer1Name()
         {
             InputUserControl.Instance.TextBoxPlayer1Name.Focus();
             InputUserControl.Instance.TextBoxPlayer1Name.SelectAll();
         }
+        #endregion
 
+        #region Add InputUserContorl
         private void AddInputUserContorl()
         {
             container.Children.Add(InputUserControl.Instance);
             Grid.SetColumn(InputUserControl.Instance, 1);
             Grid.SetRow(InputUserControl.Instance, 1);
         }
+        #endregion
     }
 }

@@ -34,10 +34,12 @@ namespace NeutronGame
         }
         #endregion
 
+        #region ButtonPlay Click
         private void ButtonPlay_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             MessageBox.Show("Test");
         }
+        #endregion
 
         #region ButtonPlay Over Effect
         private void ButtonPlay_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
