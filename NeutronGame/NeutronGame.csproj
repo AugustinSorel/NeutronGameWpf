@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="GameUserControl\GameUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InputUserControl\InputUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -66,6 +70,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameUserControl\GameUserControl.xaml.cs">
+      <DependentUpon>GameUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="InputUserControl\InputUserControl.xaml.cs">
       <DependentUpon>InputUserControl.xaml</DependentUpon>

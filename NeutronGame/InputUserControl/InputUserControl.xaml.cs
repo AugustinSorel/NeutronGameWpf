@@ -37,7 +37,25 @@ namespace NeutronGame
         #region ButtonPlay Click
         private void ButtonPlay_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            MessageBox.Show("Test");
+            RemoveInpuUserControl(GetMainWindow());
+            AddGameUserControl(GetMainWindow());
+        }
+
+        private static MainWindow GetMainWindow()
+        {
+            return Application.Current.Windows[0] as MainWindow;
+        }
+
+        private static void AddGameUserControl(MainWindow mainWindow)
+        {
+            mainWindow.container.Children.Add(GameUserControl.Instance);
+            Grid.SetColumn(GameUserControl.Instance, 1);
+            Grid.SetRow(GameUserControl.Instance, 1);
+        }
+
+        private static void RemoveInpuUserControl(MainWindow mainWindow)
+        {
+            mainWindow.container.Children.Remove(_instance);
         }
         #endregion
 
