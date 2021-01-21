@@ -6,6 +6,15 @@
              xmlns:local="clr-namespace:NeutronGame"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500">
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Foreground" Value="#bdc3c7" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+    
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -14,11 +23,39 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Column="1" Grid.Row="1" Content="Click Me"/>
+        <!--Row0-->
+        <Label Grid.Column="0" Grid.Row="0" Content="Player1"/>
+        <Label Grid.Column="1" Grid.Row="0" Content="Player2"/>
+        <Label Grid.Column="2" Grid.Row="0" Content="00:00:00"/>
+        <!--game board-->
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="0, 0, 0, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Column="0" Grid.Row="0"/>
+            <Button Grid.Column="0" Grid.Row="1"/>
+            <Button Grid.Column="0" Grid.Row="2"/>
+            
+            <Button Grid.Column="1" Grid.Row="0"/>
+            <Button Grid.Column="1" Grid.Row="1"/>
+            <Button Grid.Column="1" Grid.Row="2"/>
+
+            <Button Grid.Column="2" Grid.Row="0"/>
+            <Button Grid.Column="2" Grid.Row="1"/>
+            <Button Grid.Column="2" Grid.Row="2"/>
+        </Grid>
     </Grid>
 </UserControl>
