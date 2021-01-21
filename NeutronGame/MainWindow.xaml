@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NeutronGame"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Background="#2f3640"
+        WindowStartupLocation="CenterOwner"
         Title="MainWindow" Height="500" Width="500">
     <Grid x:Name="container">
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
     </Grid>
 </Window>
