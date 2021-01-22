@@ -26,14 +26,16 @@ namespace NeutronGame
         }
 
         #endregion
-
-        private readonly PlayersNameError playersNameError;
+        
+        #region Private Fields
+        private readonly PlayersNameError _playersNameError;
+        #endregion
 
         #region ctor
         public InputUserControl()
         {
-            playersNameError = new PlayersNameError();
-            DataContext = playersNameError;
+            _playersNameError = new PlayersNameError();
+            DataContext = _playersNameError;
             InitializeComponent();
         }
         #endregion
@@ -41,33 +43,7 @@ namespace NeutronGame
         #region ButtonPlay Click
         private void ButtonPlay_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (TextBoxPlayer1Name.Text.Trim().Length > 0 && TextBoxPlayer2Name.Text.Trim().Length > 0)
-            {
-                RemoveInpuUserControl(GetMainWindow());
-                AddGameUserControl(GetMainWindow());
-            }
-            
-            if (TextBoxPlayer1Name.Text.Trim().Length < 1)
-                playersNameError.PLayer1NameError = "Invalid Name";
-            if (TextBoxPlayer2Name.Text.Trim().Length < 1)
-                playersNameError.PLayer2NameError = "Invalid Name";
-        }
-
-        private static MainWindow GetMainWindow()
-        {
-            return Application.Current.Windows[0] as MainWindow;
-        }
-
-        private static void AddGameUserControl(MainWindow mainWindow)
-        {
-            mainWindow.container.Children.Add(GameUserControl.Instance);
-            Grid.SetColumn(GameUserControl.Instance, 1);
-            Grid.SetRow(GameUserControl.Instance, 1);
-        }
-
-        private static void RemoveInpuUserControl(MainWindow mainWindow)
-        {
-            mainWindow.container.Children.Remove(_instance);
+            new HandleButtonPlayClick(_playersNameError, TextBoxPlayer1Name, TextBoxPlayer2Name);
         }
         #endregion
 
@@ -99,9 +75,7 @@ namespace NeutronGame
         private void TextBoxPlayer2Name_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == System.Windows.Input.Key.Enter)
-            {
                 ButtonPlay_MouseLeftButtonUp(null, null);
-            }
         }
         #endregion
     }
