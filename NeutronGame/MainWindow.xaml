@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStyle="None"
-        Background="#2f3640"
+        Background="#353b48"
         WindowStartupLocation="CenterOwner"
         Title="MainWindow" Height="500" Width="500">
     <Grid x:Name="container">

@@ -7,11 +7,33 @@
              mc:Ignorable="d" 
              Background="#2f3640"
              d:DesignHeight="20" d:DesignWidth="500">
-    <Grid>
-        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Ellipse Fill="Red" Grid.Row="0" Height="10" Width="10" HorizontalAlignment="Right" Margin="5, 0, 5, 0"/>
 
-            <Ellipse Fill="Yellow" Grid.Row="0" Height="10" Width="10" HorizontalAlignment="Right" Margin="5, 0, 5, 0"/>
+    <UserControl.Resources>
+        <!--Default Button style-->
+        <Style TargetType="Ellipse">
+            <Setter Property="Height" Value="10" />
+            <Setter Property="Width" Value="10" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Margin" Value="5, 0, 5, 0" />
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/> <!--The Drag and Drop zone-->
+            <ColumnDefinition Width="auto"/> <!--Buttons-->
+        </Grid.ColumnDefinitions>
+        
+        <!--Drag and drop zone-->
+        <Rectangle x:Name="RectangleDragZone" Fill="#2f3640"/>
+
+
+        <!--Buttons-->
+        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Column="1">
+            <Ellipse x:Name="ButtonClose" Fill="Red"/>
+
+            <Ellipse x:Name="ButtonMinimize" Fill="Yellow"/>
         </StackPanel>
+
     </Grid>
 </UserControl>
