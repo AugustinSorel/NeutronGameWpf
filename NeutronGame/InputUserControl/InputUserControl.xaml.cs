@@ -28,7 +28,9 @@ namespace NeutronGame
         #endregion
         
         #region Private Fields
+
         private readonly PlayersNameError _playersNameError;
+
         #endregion
 
         #region ctor
