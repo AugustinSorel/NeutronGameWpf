@@ -27,7 +27,6 @@
         <!--Drag and drop zone-->
         <Rectangle x:Name="RectangleDragZone" Fill="#2f3640"/>
 
-
         <!--Buttons-->
         <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Column="1">
             <Ellipse x:Name="ButtonClose" Fill="Red"/>

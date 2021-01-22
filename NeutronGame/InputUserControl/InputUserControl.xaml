@@ -36,6 +36,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -46,10 +47,13 @@
         <Label Grid.Row="1" Grid.Column="1" Content="VS" Foreground="#e74c3c"/>
         <Label Grid.Row="1" Grid.Column="2" Content="{Binding Text, ElementName=TextBoxPlayer2Name}"/>
         <!--row2-->
-        <TextBox x:Name="TextBoxPlayer1Name" Grid.Column="0" Grid.Row="2" Text="Player1 Name"/>
-        <TextBox x:Name="TextBoxPlayer2Name" Grid.Column="2" Grid.Row="2" Text="Player2 Name"/>
+        <TextBox x:Name="TextBoxPlayer1Name" Grid.Column="0" Grid.Row="2" Text="Player1 Name" KeyDown="TextBoxPlayer1Name_KeyDown"/>
+        <TextBox x:Name="TextBoxPlayer2Name" Grid.Column="2" Grid.Row="2" Text="Player2 Name" KeyDown="TextBoxPlayer2Name_KeyDown"/>
         <!--row3-->
-        <TextBlock x:Name="ButtonPlay" Grid.Column="1" Grid.Row="3" Text="Play" 
+        <Label x:Name="LabelErrorPlayer1Name" Grid.Column="0" Grid.Row="3" Content="" Margin="0" Foreground="Red"/>
+        <Label x:Name="LabelErrorPlayer2Name" Grid.Column="2" Grid.Row="3" Content="" Margin="0" Foreground="Red"/>
+        <!--row4-->
+        <TextBlock x:Name="ButtonPlay" Grid.Column="1" Grid.Row="4" Text="Play" 
                VerticalAlignment="Bottom" HorizontalAlignment="Center"
                Foreground="#bdc3c7" FontSize="20"
                MouseLeftButtonUp="ButtonPlay_MouseLeftButtonUp"

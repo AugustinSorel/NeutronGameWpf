@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace NeutronGame
@@ -37,8 +38,15 @@ namespace NeutronGame
         #region ButtonPlay Click
         private void ButtonPlay_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            RemoveInpuUserControl(GetMainWindow());
-            AddGameUserControl(GetMainWindow());
+            if (TextBoxPlayer1Name.Text.Trim().Length > 0 && TextBoxPlayer2Name.Text.Trim().Length > 0)
+            {
+                RemoveInpuUserControl(GetMainWindow());
+                AddGameUserControl(GetMainWindow());
+            }
+            else if (TextBoxPlayer1Name.Text.Trim().Length < 1)
+                LabelErrorPlayer1Name.Content = "Invalid Name";
+            else if (TextBoxPlayer2Name.Text.Trim().Length < 1)
+                LabelErrorPlayer2Name.Content = "Invalid Name";
         }
 
         private static MainWindow GetMainWindow()
@@ -68,6 +76,26 @@ namespace NeutronGame
         private void ButtonPlay_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             ButtonPlay.TextDecorations = null;
+        }
+        #endregion
+
+        #region Textbox Player1 Name Enter Press
+        private void TextBoxPlayer1Name_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                TextBoxPlayer2Name.Focus();
+                TextBoxPlayer2Name.SelectAll();
+            }
+
+        }
+        #endregion
+
+        #region Textbox Player2 Name Enter Press
+        private void TextBoxPlayer2Name_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+                ButtonPlay_MouseLeftButtonUp(null, null);
         }
         #endregion
     }
