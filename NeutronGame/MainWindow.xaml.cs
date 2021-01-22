@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace NeutronGame
 {
@@ -44,3 +45,8 @@ namespace NeutronGame
         #endregion
     }
 }
+
+//----------------TODO----------------
+//
+//----------------BUGS----------------
+//

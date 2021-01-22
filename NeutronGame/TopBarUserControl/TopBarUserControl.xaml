@@ -29,9 +29,9 @@
 
         <!--Buttons-->
         <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Column="1">
-            <Ellipse x:Name="ButtonClose" Fill="Red"/>
+            <Ellipse x:Name="ButtonClose" Fill="#e74c3c"/>
 
-            <Ellipse x:Name="ButtonMinimize" Fill="Yellow"/>
+            <Ellipse x:Name="ButtonMinimize" Fill="#f1c40f"/>
         </StackPanel>
 
     </Grid>

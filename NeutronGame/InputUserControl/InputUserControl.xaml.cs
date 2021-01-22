@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace NeutronGame
@@ -28,9 +27,13 @@ namespace NeutronGame
 
         #endregion
 
+        private readonly PlayersNameError playersNameError;
+
         #region ctor
         public InputUserControl()
         {
+            playersNameError = new PlayersNameError();
+            DataContext = playersNameError;
             InitializeComponent();
         }
         #endregion
@@ -43,10 +46,11 @@ namespace NeutronGame
                 RemoveInpuUserControl(GetMainWindow());
                 AddGameUserControl(GetMainWindow());
             }
-            else if (TextBoxPlayer1Name.Text.Trim().Length < 1)
-                LabelErrorPlayer1Name.Content = "Invalid Name";
-            else if (TextBoxPlayer2Name.Text.Trim().Length < 1)
-                LabelErrorPlayer2Name.Content = "Invalid Name";
+            
+            if (TextBoxPlayer1Name.Text.Trim().Length < 1)
+                playersNameError.PLayer1NameError = "Invalid Name";
+            if (TextBoxPlayer2Name.Text.Trim().Length < 1)
+                playersNameError.PLayer2NameError = "Invalid Name";
         }
 
         private static MainWindow GetMainWindow()
@@ -95,7 +99,9 @@ namespace NeutronGame
         private void TextBoxPlayer2Name_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == System.Windows.Input.Key.Enter)
+            {
                 ButtonPlay_MouseLeftButtonUp(null, null);
+            }
         }
         #endregion
     }

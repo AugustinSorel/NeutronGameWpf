@@ -42,17 +42,17 @@
 
         <!--title-->
         <Label Content="Welcome to the Neutron Game" Grid.ColumnSpan="3" Margin="0"/>
-        <!--row1-->
+        <!--Display Players Name-->
         <Label Grid.Row="1" Grid.Column="0" Content="{Binding Text, ElementName=TextBoxPlayer1Name}"/>
         <Label Grid.Row="1" Grid.Column="1" Content="VS" Foreground="#e74c3c"/>
         <Label Grid.Row="1" Grid.Column="2" Content="{Binding Text, ElementName=TextBoxPlayer2Name}"/>
-        <!--row2-->
+        <!--Input Players Name-->
         <TextBox x:Name="TextBoxPlayer1Name" Grid.Column="0" Grid.Row="2" Text="Player1 Name" KeyDown="TextBoxPlayer1Name_KeyDown"/>
         <TextBox x:Name="TextBoxPlayer2Name" Grid.Column="2" Grid.Row="2" Text="Player2 Name" KeyDown="TextBoxPlayer2Name_KeyDown"/>
-        <!--row3-->
-        <Label x:Name="LabelErrorPlayer1Name" Grid.Column="0" Grid.Row="3" Content="" Margin="0" Foreground="Red"/>
-        <Label x:Name="LabelErrorPlayer2Name" Grid.Column="2" Grid.Row="3" Content="" Margin="0" Foreground="Red"/>
-        <!--row4-->
+        <!--Player Name Error-->
+        <Label x:Name="LabelErrorPlayer1Name" Grid.Column="0" Grid.Row="3" Content="{Binding Path=PLayer1NameError, UpdateSourceTrigger=PropertyChanged}" Margin="0" Foreground="Red"/>
+        <Label x:Name="LabelErrorPlayer2Name" Grid.Column="2" Grid.Row="3" Content="{Binding Path=PLayer2NameError, UpdateSourceTrigger=PropertyChanged}" Margin="0" Foreground="Red"/>
+        <!--Play Bottom-->
         <TextBlock x:Name="ButtonPlay" Grid.Column="1" Grid.Row="4" Text="Play" 
                VerticalAlignment="Bottom" HorizontalAlignment="Center"
                Foreground="#bdc3c7" FontSize="20"
@@ -60,8 +60,5 @@
                MouseEnter="ButtonPlay_MouseEnter" 
                MouseLeave="ButtonPlay_MouseLeave"
          />
-        
-        
-
     </Grid>
 </UserControl>

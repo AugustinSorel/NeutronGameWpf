@@ -27,6 +27,11 @@ namespace NeutronGame
 
         #endregion
 
+        #region Buttons Const
+        private const byte DEFAULT_BUTTON_HEIGHT = 10;
+        private const byte ON_HOVER_BUTTON_HEIGHT = 13;
+        #endregion
+
         public TopBarUserControl()
         {
             InitializeComponent();
@@ -39,16 +44,16 @@ namespace NeutronGame
         #region Button Minimize Hover Event
         private void AddButtonMinimizeHoverEvent()
         {
-            ButtonMinimize.MouseEnter += (s, e) => ButtonMinimize.Width = ButtonMinimize.Height = 13;
-            ButtonMinimize.MouseLeave += (s, e) => ButtonMinimize.Width = ButtonMinimize.Height = 10;
+            ButtonMinimize.MouseEnter += (s, e) => ButtonMinimize.Width = ButtonMinimize.Height = ON_HOVER_BUTTON_HEIGHT;
+            ButtonMinimize.MouseLeave += (s, e) => ButtonMinimize.Width = ButtonMinimize.Height = DEFAULT_BUTTON_HEIGHT;
         }
         #endregion
 
         #region Button Close Hover Event
         private void AddButtonCloseHoverEvent()
         {
-            ButtonClose.MouseEnter += (s, e) => ButtonClose.Width = ButtonClose.Height = 13;
-            ButtonClose.MouseLeave += (s, e) => ButtonClose.Width = ButtonClose.Height = 10;
+            ButtonClose.MouseEnter += (s, e) => ButtonClose.Width = ButtonClose.Height = ON_HOVER_BUTTON_HEIGHT;
+            ButtonClose.MouseLeave += (s, e) => ButtonClose.Width = ButtonClose.Height = DEFAULT_BUTTON_HEIGHT;
         }
         #endregion
 
