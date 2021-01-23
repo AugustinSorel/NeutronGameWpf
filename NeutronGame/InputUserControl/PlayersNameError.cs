@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace NeutronGame
 {
+    /// <summary>
+    /// hold the error if the user enter a wrong name
+    /// </summary>
     public class PlayersNameError : INotifyPropertyChanged
     {
         #region Players Name Error Fields
