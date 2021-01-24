@@ -15,26 +15,7 @@
             <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>
         <!--Game Board Buttons-->
-        <Style TargetType="Button">
-            <Setter Property="OverridesDefaultStyle" Value="True"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Name="border" 
-                        BorderThickness="1"
-                        BorderBrush="Gray" 
-                        Background="#353b48">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="White" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource CellButton}" />
         <!--EllipsePlayer1-->
         <Style x:Key="EllipsePlayer1" TargetType="Ellipse">
             <Setter Property="Fill" Value="#e74c3c"/>

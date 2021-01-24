@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:NeutronGame"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="RessourceDictionaries/ButtonCellGameBoardDictionary.xaml"/>
     </Application.Resources>
 </Application>

@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace NeutronGame
@@ -33,7 +32,14 @@ namespace NeutronGame
         public GameUserControl()
         {
             InitializeComponent();
+            InitGameBoard();
+        }
 
+        #endregion
+
+        #region Init The Default Game Board;
+        private void InitGameBoard()
+        {
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
@@ -42,12 +48,12 @@ namespace NeutronGame
                     {
                         Style EllipseStyle;
 
-                        if (i==0)
-                            EllipseStyle = this.FindResource("EllipsePlayer1") as Style;
-                        else if (i==4)
-                            EllipseStyle = this.FindResource("EllipsePlayer2") as Style;
+                        if (i == 0)
+                            EllipseStyle = FindResource("EllipsePlayer1") as Style;
+                        else if (i == 4)
+                            EllipseStyle = FindResource("EllipsePlayer2") as Style;
                         else
-                            EllipseStyle = this.FindResource("EllipseNeutron") as Style;
+                            EllipseStyle = FindResource("EllipseNeutron") as Style;
 
                         Ellipse ellipse = new Ellipse();
                         ellipse.Style = EllipseStyle;
@@ -60,6 +66,8 @@ namespace NeutronGame
         }
         #endregion
 
+
+        #region  Mouse Enter/Leave for tokens
         private void Ellipse_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             ((Ellipse)sender).Height = 50;
@@ -84,5 +92,6 @@ namespace NeutronGame
             ((Ellipse)sender).Height = 40;
             ((Ellipse)sender).Width = 40;
         }
+        #endregion
     }
 }
