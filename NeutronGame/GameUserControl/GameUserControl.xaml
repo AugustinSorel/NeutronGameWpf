@@ -8,47 +8,27 @@
              d:DesignHeight="500" d:DesignWidth="500">
 
     <UserControl.Resources>
-        <!--Default Label-->
-        <Style TargetType="Label">
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="Foreground" Value="#bdc3c7" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-        </Style>
-        <!--Game Board Buttons-->
-        <Style TargetType="Button" BasedOn="{StaticResource CellButton}" />
-        <!--EllipsePlayer1-->
-        <Style x:Key="EllipsePlayer1" TargetType="Ellipse">
-            <Setter Property="Fill" Value="#e74c3c"/>
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Width" Value="40"/>
-            <Setter Property="Stroke" Value="White"/>
-            <Setter Property="StrokeThickness" Value="0"/>
-
-            <EventSetter Event="MouseEnter" Handler="Ellipse_MouseEnter"/>
-            <EventSetter Event="MouseLeave" Handler="Ellipse_MouseLeave"/>
-        </Style>
-        <!--EllipsePlayer2-->
-        <Style x:Key="EllipsePlayer2" TargetType="Ellipse">
-            <Setter Property="Fill" Value="#2ecc71"/>
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Width" Value="40"/>
-            <Setter Property="Stroke" Value="White"/>
-            <Setter Property="StrokeThickness" Value="0"/>
-
-            <EventSetter Event="MouseEnter" Handler="Ellipse_MouseEnter_1"/>
-            <EventSetter Event="MouseLeave" Handler="Ellipse_MouseLeave_1"/>
-        </Style>
-        <!--NeutronEllipse-->
-        <Style x:Key="EllipseNeutron" TargetType="Ellipse">
-            <Setter Property="Fill" Value="#f39c12"/>
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Width" Value="40"/>
-            <Setter Property="Stroke" Value="White"/>
-            <Setter Property="StrokeThickness" Value="0"/>
-
-            <EventSetter Event="MouseEnter" Handler="Ellipse_MouseEnter_1"/>
-            <EventSetter Event="MouseLeave" Handler="Ellipse_MouseLeave_1"/>
-        </Style>
+        <ResourceDictionary>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/NeutronGame;component/GameUserControlDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            
+            <Style TargetType="Ellipse" BasedOn="{StaticResource EllipsePlayer1}" x:Key="TokenPlayer1">
+                <EventSetter Event="MouseEnter" Handler="Ellipse_MouseEnter"/>
+                <EventSetter Event="MouseLeave" Handler="Ellipse_MouseLeave"/>
+            </Style>
+            
+            <Style TargetType="Ellipse" BasedOn="{StaticResource EllipsePlayer2}" x:Key="TokenPlayer2">
+                <EventSetter Event="MouseEnter" Handler="Ellipse_MouseEnter"/>
+                <EventSetter Event="MouseLeave" Handler="Ellipse_MouseLeave"/>
+            </Style>
+            
+            <Style TargetType="Ellipse" BasedOn="{StaticResource EllipseNeutron}" x:Key="TokenNeutron">
+                <EventSetter Event="MouseEnter" Handler="Ellipse_MouseEnter"/>
+                <EventSetter Event="MouseLeave" Handler="Ellipse_MouseLeave"/>
+            </Style>
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>

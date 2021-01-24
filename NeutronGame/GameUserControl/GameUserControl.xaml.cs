@@ -49,14 +49,16 @@ namespace NeutronGame
                         Style EllipseStyle;
 
                         if (i == 0)
-                            EllipseStyle = FindResource("EllipsePlayer1") as Style;
+                            EllipseStyle = FindResource("TokenPlayer1") as Style;
                         else if (i == 4)
-                            EllipseStyle = FindResource("EllipsePlayer2") as Style;
+                            EllipseStyle = FindResource("TokenPlayer2") as Style;
                         else
-                            EllipseStyle = FindResource("EllipseNeutron") as Style;
+                            EllipseStyle = FindResource("TokenNeutron") as Style;
 
-                        Ellipse ellipse = new Ellipse();
-                        ellipse.Style = EllipseStyle;
+                        Ellipse ellipse = new Ellipse
+                        {
+                            Style = EllipseStyle
+                        };
                         GameBoard.Children.Add(ellipse);
                         Grid.SetColumn(ellipse, j);
                         Grid.SetRow(ellipse, i);
