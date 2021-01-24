@@ -61,7 +61,7 @@
     <Compile Include="TopBarUserControl\TopBarUserControl.xaml.cs">
       <DependentUpon>TopBarUserControl.xaml</DependentUpon>
     </Compile>
-    <Page Include="GameUserControlDictionary.xaml">
+    <Page Include="Dictionaries\GameUserControlDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

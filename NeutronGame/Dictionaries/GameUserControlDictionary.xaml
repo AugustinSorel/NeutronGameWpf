@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:NeutronGame"
-                    x:Class="NeutronGame.Test">
+                    x:Class="NeutronGame.EllipseEventHandler">
     <Style TargetType="Label">
         <Setter Property="FontSize" Value="20" />
         <Setter Property="Foreground" Value="#bdc3c7" />
