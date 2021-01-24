@@ -14,20 +14,6 @@
                 <ResourceDictionary Source="pack://application:,,,/NeutronGame;component/GameUserControlDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
             
-            <Style TargetType="Ellipse" BasedOn="{StaticResource EllipsePlayer1}" x:Key="TokenPlayer1">
-                <EventSetter Event="MouseEnter" Handler="Ellipse_MouseEnter"/>
-                <EventSetter Event="MouseLeave" Handler="Ellipse_MouseLeave"/>
-            </Style>
-            
-            <Style TargetType="Ellipse" BasedOn="{StaticResource EllipsePlayer2}" x:Key="TokenPlayer2">
-                <EventSetter Event="MouseEnter" Handler="Ellipse_MouseEnter"/>
-                <EventSetter Event="MouseLeave" Handler="Ellipse_MouseLeave"/>
-            </Style>
-            
-            <Style TargetType="Ellipse" BasedOn="{StaticResource EllipseNeutron}" x:Key="TokenNeutron">
-                <EventSetter Event="MouseEnter" Handler="Ellipse_MouseEnter"/>
-                <EventSetter Event="MouseLeave" Handler="Ellipse_MouseLeave"/>
-            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
 

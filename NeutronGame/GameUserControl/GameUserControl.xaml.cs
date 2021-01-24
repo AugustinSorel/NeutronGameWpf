@@ -49,50 +49,20 @@ namespace NeutronGame
                         Style EllipseStyle;
 
                         if (i == 0)
-                            EllipseStyle = FindResource("TokenPlayer1") as Style;
+                            EllipseStyle = FindResource("EllipsePlayer1") as Style;
                         else if (i == 4)
-                            EllipseStyle = FindResource("TokenPlayer2") as Style;
+                            EllipseStyle = FindResource("EllipsePlayer2") as Style;
                         else
-                            EllipseStyle = FindResource("TokenNeutron") as Style;
+                            EllipseStyle = FindResource("EllipseNeutron") as Style;
 
-                        Ellipse ellipse = new Ellipse
-                        {
-                            Style = EllipseStyle
-                        };
+                        Ellipse ellipse = new Ellipse();
+                        ellipse.Style = EllipseStyle;
                         GameBoard.Children.Add(ellipse);
                         Grid.SetColumn(ellipse, j);
                         Grid.SetRow(ellipse, i);
                     }
                 }
             }
-        }
-        #endregion
-
-
-        #region  Mouse Enter/Leave for tokens
-        private void Ellipse_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            ((Ellipse)sender).Height = 50;
-            ((Ellipse)sender).Width = 50;
-        }
-
-        private void Ellipse_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-
-            ((Ellipse)sender).Height = 40;
-            ((Ellipse)sender).Width = 40;
-        }
-
-        private void Ellipse_MouseEnter_1(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            ((Ellipse)sender).Height = 50;
-            ((Ellipse)sender).Width = 50;
-        }
-
-        private void Ellipse_MouseLeave_1(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            ((Ellipse)sender).Height = 40;
-            ((Ellipse)sender).Width = 40;
         }
         #endregion
     }
