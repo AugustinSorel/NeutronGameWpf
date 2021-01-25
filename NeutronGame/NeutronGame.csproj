@@ -57,7 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="InputUserControl\HandleButtonPlayClick.cs" />
     <Compile Include="InputUserControl\PlayersNameError.cs" />
-    <Compile Include="Test.cs" />
+    <Compile Include="Token.cs" />
     <Compile Include="TopBarUserControl\TopBarUserControl.xaml.cs">
       <DependentUpon>TopBarUserControl.xaml</DependentUpon>
     </Compile>
@@ -92,6 +92,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="RessourceDictionaries\GameUserControlDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dictionaries\TokenDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

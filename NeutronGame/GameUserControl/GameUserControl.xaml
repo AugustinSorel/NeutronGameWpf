@@ -12,6 +12,7 @@
             
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/NeutronGame;component//Dictionaries/GameUserControlDictionary.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NeutronGame;component//Dictionaries/TokenDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
             
         </ResourceDictionary>
