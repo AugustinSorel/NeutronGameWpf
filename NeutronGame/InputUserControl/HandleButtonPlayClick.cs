@@ -10,6 +10,7 @@ namespace NeutronGame
         {
             if (textBoxPlayer1Name.Text.Trim().Length > 0 && textBoxPlayer2Name.Text.Trim().Length > 0)
             {
+                SetPlayersName(textBoxPlayer1Name, textBoxPlayer2Name);
                 RemoveInpuUserControl(GetMainWindow());
                 AddGameUserControl(GetMainWindow());
                 return;
@@ -18,6 +19,18 @@ namespace NeutronGame
             playersNameError.PLayer1NameError = textBoxPlayer1Name.Text.Trim().Length < 1 ? "Invalid Name" : "";
 
             playersNameError.PLayer2NameError = textBoxPlayer2Name.Text.Trim().Length < 1 ? "Invalid Name" : "";
+        }
+
+        #endregion
+        
+        #region Set players Name 
+        private void SetPlayersName(TextBox textBoxPlayer1Name, TextBox textBoxPlayer2Name)
+        {
+            new Players
+            {
+                Player1Name = textBoxPlayer1Name.Text,
+                Player2Name = textBoxPlayer2Name.Text
+            };
         }
         #endregion
 

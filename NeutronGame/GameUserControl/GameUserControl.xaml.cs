@@ -55,8 +55,10 @@ namespace NeutronGame
                         else
                             EllipseStyle = FindResource("EllipseNeutron") as Style;
 
-                        Ellipse ellipse = new Ellipse();
-                        ellipse.Style = EllipseStyle;
+                        Ellipse ellipse = new Ellipse
+                        {
+                            Style = EllipseStyle
+                        };
                         GameBoard.Children.Add(ellipse);
                         Grid.SetColumn(ellipse, j);
                         Grid.SetRow(ellipse, i);
