@@ -30,10 +30,22 @@ namespace NeutronGame
         }
         #endregion
 
+        #region ctor
+
+        public Players()
+        {
+            _player1Name = "Player1";
+            _player2Name = "Player2";
+        }
+
+        #endregion
+
+        #region On Property Changed
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
     }
 }
