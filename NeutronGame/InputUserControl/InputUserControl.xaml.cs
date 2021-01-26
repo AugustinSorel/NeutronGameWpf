@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace NeutronGame
 {
@@ -27,17 +28,9 @@ namespace NeutronGame
 
         #endregion
         
-        #region Private Fields
-
-        private readonly PlayersNameError _playersNameError;
-
-        #endregion
-
         #region ctor
         public InputUserControl()
         {
-            _playersNameError = new PlayersNameError();
-            DataContext = _playersNameError;
             InitializeComponent();
         }
         #endregion
@@ -45,7 +38,7 @@ namespace NeutronGame
         #region ButtonPlay Click
         private void ButtonPlay_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            new HandleButtonPlayClick(_playersNameError, TextBoxPlayer1Name, TextBoxPlayer2Name);
+            new HandleButtonPlayClick(TextBoxPlayer1Name, TextBoxPlayer2Name);
         }
         #endregion
 

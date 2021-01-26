@@ -56,7 +56,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="InputUserControl\HandleButtonPlayClick.cs" />
-    <Compile Include="InputUserControl\PlayersNameError.cs" />
     <Compile Include="EventHandler\Token\Token.cs" />
     <Compile Include="Players\Players.cs" />
     <Compile Include="TopBarUserControl\TopBarUserControl.xaml.cs">

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace NeutronGame
 {
@@ -14,16 +15,8 @@ namespace NeutronGame
             get { return _player1Name; }
             set 
             {
-                if (value == string.Empty)
-                {
-                    _player1Name = "Invalid Name";
-                    OnPropertyChanged();
-                }
-                else
-                {
-                    _player1Name = value;
-                    OnPropertyChanged();
-                }
+                _player1Name = value;
+                OnPropertyChanged();
             }
         }
 
@@ -32,16 +25,8 @@ namespace NeutronGame
             get { return _player2Name; }
             set 
             {
-                if (value == string.Empty)
-                {
-                    _player2Name = "Invalid Name";
-                    OnPropertyChanged();
-                }
-                else
-                {
-                    _player2Name = value;
-                    OnPropertyChanged();
-                }
+                _player2Name = value;
+                OnPropertyChanged();
             }
         }
         #endregion

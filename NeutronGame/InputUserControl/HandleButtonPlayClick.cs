@@ -6,19 +6,14 @@ namespace NeutronGame
     internal class HandleButtonPlayClick
     {
         #region ctor
-        public HandleButtonPlayClick(PlayersNameError playersNameError, TextBox textBoxPlayer1Name, TextBox textBoxPlayer2Name)
+        public HandleButtonPlayClick(TextBox textBoxPlayer1Name, TextBox textBoxPlayer2Name)
         {
             if (textBoxPlayer1Name.Text.Trim().Length > 0 && textBoxPlayer2Name.Text.Trim().Length > 0)
             {
                 SetPlayersName(textBoxPlayer1Name, textBoxPlayer2Name);
                 RemoveInpuUserControl(GetMainWindow());
                 AddGameUserControl(GetMainWindow());
-                return;
             }
-
-            playersNameError.PLayer1NameError = textBoxPlayer1Name.Text.Trim().Length < 1 ? "Invalid Name" : "";
-
-            playersNameError.PLayer2NameError = textBoxPlayer2Name.Text.Trim().Length < 1 ? "Invalid Name" : "";
         }
 
         #endregion
