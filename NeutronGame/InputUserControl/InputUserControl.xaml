@@ -7,6 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500">
 
+    <UserControl.DataContext>
+        <local:Players/>
+    </UserControl.DataContext>
+
     <UserControl.Resources>
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="20"/>
@@ -44,17 +48,17 @@
         <Label Content="Welcome to the Neutron Game" Grid.ColumnSpan="3" Margin="0"/>
         <!--Display Players Name-->
         <Label Grid.Row="1" Grid.Column="0" 
-               Content="{Binding Text, ElementName=TextBoxPlayer1Name}"
+               Content="{Binding Player1Name}"
         />
         <Label Grid.Row="1" Grid.Column="1" Content="VS" Foreground="#e74c3c"/>
         <Label Grid.Row="1" Grid.Column="2" 
-               Content="{Binding Text, ElementName=TextBoxPlayer2Name}"
+               Content="{Binding Player2Name}"
         />
         <!--Input Players Name-->
-        <TextBox x:Name="TextBoxPlayer1Name" Grid.Column="0" Grid.Row="2" Text="Player1 Name" 
+        <TextBox x:Name="TextBoxPlayer1Name" Grid.Column="0" Grid.Row="2" Text="{Binding Player1Name}" 
                  KeyDown="TextBoxPlayer1Name_KeyDown"
         />
-        <TextBox x:Name="TextBoxPlayer2Name" Grid.Column="2" Grid.Row="2" Text="Player2 Name" 
+        <TextBox x:Name="TextBoxPlayer2Name" Grid.Column="2" Grid.Row="2" Text="{Binding Player2Name}" 
                  KeyDown="TextBoxPlayer2Name_KeyDown"
         />
         <!--Player Name Error-->

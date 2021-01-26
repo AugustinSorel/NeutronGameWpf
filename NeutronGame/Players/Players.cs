@@ -13,9 +13,17 @@ namespace NeutronGame
         {
             get { return _player1Name; }
             set 
-            { 
-                _player1Name = value; 
-                OnPropertyChanged();
+            {
+                if (value == string.Empty)
+                {
+                    _player1Name = "Invalid Name";
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _player1Name = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -24,8 +32,16 @@ namespace NeutronGame
             get { return _player2Name; }
             set 
             {
-                _player2Name = value;
-                OnPropertyChanged();
+                if (value == string.Empty)
+                {
+                    _player2Name = "Invalid Name";
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _player2Name = value;
+                    OnPropertyChanged();
+                }
             }
         }
         #endregion
