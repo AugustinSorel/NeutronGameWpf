@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Game\Game.cs" />
     <Compile Include="InputUserControl\HandleButtonPlayClick.cs" />
     <Compile Include="EventHandler\Token\Token.cs" />
     <Compile Include="Players\Players.cs" />

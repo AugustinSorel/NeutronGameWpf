@@ -12,6 +12,7 @@
 
         <EventSetter Event="MouseEnter" Handler="Ellipse_MouseEnter" />
         <EventSetter Event="MouseLeave" Handler="Ellipse_MouseLeave" />
+        <EventSetter Event="MouseDown" Handler="Ellipse_Click" />
     </Style>
     <!--EllipsePlayer2-->
     <Style x:Key="EllipsePlayer2" TargetType="Ellipse">
@@ -23,6 +24,7 @@
 
         <EventSetter Event="MouseEnter" Handler="Ellipse_MouseEnter" />
         <EventSetter Event="MouseLeave" Handler="Ellipse_MouseLeave" />
+        <EventSetter Event="MouseDown" Handler="Ellipse_Click" />
     </Style>
     <!--NeutronEllipse-->
     <Style x:Key="EllipseNeutron" TargetType="Ellipse">
@@ -34,5 +36,6 @@
 
         <EventSetter Event="MouseEnter" Handler="Ellipse_MouseEnter" />
         <EventSetter Event="MouseLeave" Handler="Ellipse_MouseLeave" />
+        <EventSetter Event="MouseDown" Handler="Ellipse_Click" />
     </Style>
 </ResourceDictionary>

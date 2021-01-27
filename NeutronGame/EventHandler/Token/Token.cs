@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Shapes;
 
 namespace NeutronGame
@@ -18,6 +19,15 @@ namespace NeutronGame
             ((Ellipse)sender).Height = 40;
             ((Ellipse)sender).Width = 40;
         }
+        #endregion
+
+        #region Click Event
+
+        private void Ellipse_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Test");
+        }
+
         #endregion
     }
 }
