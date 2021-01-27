@@ -6,10 +6,6 @@
              xmlns:local="clr-namespace:NeutronGame"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500">
-
-    <UserControl.DataContext>
-        <local:Players/>
-    </UserControl.DataContext>
     
     <UserControl.Resources>
         <ResourceDictionary>

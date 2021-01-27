@@ -30,6 +30,7 @@ namespace NeutronGame
         #region ctor
         public InputUserControl()
         {
+            DataContext = Players.Instance;
             InitializeComponent();
         }
         #endregion

@@ -31,6 +31,20 @@ namespace NeutronGame
         }
         #endregion
 
+        private static Players instance = null;
+
+        public static Players Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Players();
+                }
+                return instance;
+            }
+        }
+
         #region ctor
 
         public Players()

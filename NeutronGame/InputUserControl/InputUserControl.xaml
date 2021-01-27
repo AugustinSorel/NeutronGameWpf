@@ -7,10 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500">
 
-    <UserControl.DataContext>
-        <local:Players/>
-    </UserControl.DataContext>
-
     <UserControl.Resources>
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="20"/>
@@ -26,7 +22,6 @@
             <Setter Property="Margin" Value="0, 30, 0, 0"/>
             <Setter Property="Background" Value="Transparent"/>
         </Style>
-
     </UserControl.Resources>
 
     <Grid>
@@ -55,10 +50,12 @@
                Content="{Binding Player2Name}"
         />
         <!--Input Players Name-->
-        <TextBox x:Name="TextBoxPlayer1Name" Grid.Column="0" Grid.Row="2" Text="{Binding Player1Name, UpdateSourceTrigger=PropertyChanged}" 
+        <TextBox x:Name="TextBoxPlayer1Name" Grid.Column="0" Grid.Row="2" Text="{Binding Player1Name, 
+                 UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                  KeyDown="TextBoxPlayer1Name_KeyDown"
         />
-        <TextBox x:Name="TextBoxPlayer2Name" Grid.Column="2" Grid.Row="2" Text="{Binding Player2Name, UpdateSourceTrigger=PropertyChanged}" 
+        <TextBox x:Name="TextBoxPlayer2Name" Grid.Column="2" Grid.Row="2" Text="{Binding Player2Name, 
+                 UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                  KeyDown="TextBoxPlayer2Name_KeyDown"
         />
         <!--Play Bottom-->

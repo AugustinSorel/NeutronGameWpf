@@ -31,6 +31,7 @@ namespace NeutronGame
         #region ctor
         public GameUserControl()
         {
+            DataContext = Players.Instance;
             InitializeComponent();
             InitGameBoard();
         }
