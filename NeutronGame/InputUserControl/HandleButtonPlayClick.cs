@@ -6,13 +6,25 @@ namespace NeutronGame
     internal class HandleButtonPlayClick
     {
         #region ctor
-        public HandleButtonPlayClick(string PLayer1Name, string Player2Name)
+        public HandleButtonPlayClick()
         {
-            if (PLayer1Name.Length > 0 && Player2Name.Length > 0)
+            if (GetPLayer1Name().Length > 0 && GetPlayer2Name().Length > 0)
             {
                 RemoveInpuUserControl(GetMainWindow());
                 AddGameUserControl(GetMainWindow());
             }
+        }
+        #endregion
+
+        #region Get Players Name
+        private string GetPlayer2Name()
+        {
+            return Players.Instance.Player2Name;
+        }
+
+        private string GetPLayer1Name()
+        {
+            return Players.Instance.Player1Name;
         }
 
         #endregion

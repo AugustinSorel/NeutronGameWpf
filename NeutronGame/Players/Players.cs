@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows;
 
 namespace NeutronGame
 {
@@ -31,19 +30,21 @@ namespace NeutronGame
         }
         #endregion
 
-        private static Players instance = null;
+        #region Player instance
+        private static Players _instance = null;
 
         public static Players Instance
         {
             get
             {
-                if (instance == null)
+                if (_instance == null)
                 {
-                    instance = new Players();
+                    _instance = new Players();
                 }
-                return instance;
+                return _instance;
             }
         }
+        #endregion
 
         #region ctor
 

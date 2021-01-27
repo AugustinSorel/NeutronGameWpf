@@ -38,7 +38,7 @@ namespace NeutronGame
         #region ButtonPlay Click
         private void ButtonPlay_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            new HandleButtonPlayClick(TextBoxPlayer1Name.Text.Trim(), TextBoxPlayer2Name.Text.Trim());
+            new HandleButtonPlayClick();
         }
         #endregion
 
