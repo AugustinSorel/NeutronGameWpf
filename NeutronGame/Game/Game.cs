@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace NeutronGame
@@ -23,6 +24,22 @@ namespace NeutronGame
             this.gameUserControl = gameUserControl;
             InitGameBoard();
             SetGameVariable();
+            SetLabelColor();
+        }
+
+        private void SetLabelColor()
+        {
+            if (player1Turn)
+            {
+                gameUserControl.LabelPlayer1Name.Foreground = Brushes.White;
+                gameUserControl.LabelPlayer2Name.Foreground = (SolidColorBrush)(new BrushConverter().ConvertFrom("#bdc3c7"));
+            }
+            else
+            {
+                gameUserControl.LabelPlayer1Name.Foreground = (SolidColorBrush)(new BrushConverter().ConvertFrom("#bdc3c7"));
+                gameUserControl.LabelPlayer2Name.Foreground = Brushes.White;
+            }
+                
         }
 
         private void SetGameVariable()
