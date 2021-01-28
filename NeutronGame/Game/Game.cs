@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -18,7 +17,7 @@ namespace NeutronGame
 
         #endregion
 
-
+        #region ctor
         public Game(GameUserControl gameUserControl)
         {
             this.gameUserControl = gameUserControl;
@@ -32,11 +31,11 @@ namespace NeutronGame
             if (player1Turn)
             {
                 gameUserControl.LabelPlayer1Name.Foreground = Brushes.White;
-                gameUserControl.LabelPlayer2Name.Foreground = (SolidColorBrush)(new BrushConverter().ConvertFrom("#bdc3c7"));
+                gameUserControl.LabelPlayer2Name.Foreground = GlobalColors.LightGray;
             }
             else
             {
-                gameUserControl.LabelPlayer1Name.Foreground = (SolidColorBrush)(new BrushConverter().ConvertFrom("#bdc3c7"));
+                gameUserControl.LabelPlayer1Name.Foreground = GlobalColors.LightGray;
                 gameUserControl.LabelPlayer2Name.Foreground = Brushes.White;
             }
                 
@@ -46,6 +45,7 @@ namespace NeutronGame
         {
             player1Turn = true;
         }
+        #endregion
 
         #region Init The Default Game Board;
         private void InitGameBoard()

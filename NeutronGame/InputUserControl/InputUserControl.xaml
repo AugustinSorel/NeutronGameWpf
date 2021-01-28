@@ -44,7 +44,7 @@
         <Label Name="LabelPlayer1Name" Grid.Row="1" Grid.Column="0" 
                Content="{Binding Player1Name}"
         />
-        <Label Grid.Row="1" Grid.Column="1" Content="VS" Foreground="#e74c3c"/>
+        <Label Grid.Row="1" Grid.Column="1" Content="VS" Foreground="{Binding Source={x:Static local:GlobalColors.Red}}"/>
         <Label Name="LabelPlayer2Name"
                Grid.Row="1" Grid.Column="2" 
                Content="{Binding Player2Name}"
