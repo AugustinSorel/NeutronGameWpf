@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Game\GameTimer.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Global\GlobalColors.cs" />
     <Compile Include="InputUserControl\HandleButtonPlayClick.cs" />

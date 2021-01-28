@@ -8,7 +8,24 @@ namespace NeutronGame
     class Game
     {
         #region User Control Fields
-        private readonly GameUserControl gameUserControl;
+        private GameUserControl gameUserControl;
+        #endregion
+
+        #region Game Instance
+
+        private static Game _instance;
+
+        public static Game Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new Game();
+
+                return _instance;
+            }
+        }
+
         #endregion
 
         #region Game Fields
@@ -17,8 +34,9 @@ namespace NeutronGame
 
         #endregion
 
-        #region ctor
-        public Game(GameUserControl gameUserControl)
+        #region Start New Game
+
+        public void StartNewGame(GameUserControl gameUserControl)
         {
             this.gameUserControl = gameUserControl;
             InitGameBoard();
@@ -45,6 +63,15 @@ namespace NeutronGame
         {
             player1Turn = true;
         }
+        #endregion
+
+        #region Handle Token click Event
+
+        public void HandleTokenClick()
+        {
+            MessageBox.Show("Test");
+        }
+
         #endregion
 
         #region Init The Default Game Board;

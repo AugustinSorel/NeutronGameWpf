@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Shapes;
 
 namespace NeutronGame
@@ -25,7 +24,7 @@ namespace NeutronGame
 
         private void Ellipse_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Test");
+            Game.Instance.HandleTokenClick();
         }
 
         #endregion

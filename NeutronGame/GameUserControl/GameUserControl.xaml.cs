@@ -31,10 +31,8 @@ namespace NeutronGame
         {
             InitializeComponent();
             DataContext = Players.Instance;
-            new Game(this);
+            Game.Instance.StartNewGame(this);
         }
         #endregion
-
-       
     }
 }
