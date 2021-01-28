@@ -56,7 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Game\Game.cs" />
-    <Compile Include="GlobalColors.cs" />
+    <Compile Include="Global\GlobalColors.cs" />
     <Compile Include="InputUserControl\HandleButtonPlayClick.cs" />
     <Compile Include="EventHandler\Token\Token.cs" />
     <Compile Include="Players\Players.cs" />
@@ -128,8 +128,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Global\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

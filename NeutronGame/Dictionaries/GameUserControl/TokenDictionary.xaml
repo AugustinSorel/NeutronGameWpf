@@ -4,7 +4,7 @@
                     x:Class="NeutronGame.EllipseEventHandler">
     <!--EllipsePlayer1-->
     <Style x:Key="EllipsePlayer1" TargetType="Ellipse">
-        <Setter Property="Fill" Value="#e74c3c"/>
+        <Setter Property="Fill" Value="{Binding Source={x:Static local:GlobalColors.TokenPlayer1}}"/>
         <Setter Property="Height" Value="40"/>
         <Setter Property="Width" Value="40"/>
         <Setter Property="Stroke" Value="White"/>
@@ -16,7 +16,7 @@
     </Style>
     <!--EllipsePlayer2-->
     <Style x:Key="EllipsePlayer2" TargetType="Ellipse">
-        <Setter Property="Fill" Value="#2ecc71"/>
+        <Setter Property="Fill" Value="{Binding Source={x:Static local:GlobalColors.TokenPlayer2}}"/>
         <Setter Property="Height" Value="40"/>
         <Setter Property="Width" Value="40"/>
         <Setter Property="Stroke" Value="White"/>
@@ -28,7 +28,7 @@
     </Style>
     <!--NeutronEllipse-->
     <Style x:Key="EllipseNeutron" TargetType="Ellipse">
-        <Setter Property="Fill" Value="#f39c12"/>
+        <Setter Property="Fill" Value="{Binding Source={x:Static local:GlobalColors.TokenNeutron}}"/>
         <Setter Property="Height" Value="40"/>
         <Setter Property="Width" Value="40"/>
         <Setter Property="Stroke" Value="White"/>

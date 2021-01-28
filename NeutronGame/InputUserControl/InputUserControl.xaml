@@ -10,7 +10,7 @@
     <UserControl.Resources>
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Foreground" Value="#bdc3c7"/>
+            <Setter Property="Foreground" Value="{Binding Source={x:Static local:GlobalColors.LightGray}}"/>
             <Setter Property="FontFamily" Value="Segoe UI Light"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0, 30, 0, 0"/>
@@ -18,7 +18,7 @@
 
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Foreground" Value="#bdc3c7"/>
+            <Setter Property="Foreground" Value="{Binding Source={x:Static local:GlobalColors.LightGray}}"/>
             <Setter Property="Margin" Value="0, 30, 0, 0"/>
             <Setter Property="Background" Value="Transparent"/>
         </Style>
@@ -61,7 +61,7 @@
         <!--Play Bottom-->
         <TextBlock x:Name="ButtonPlay" Grid.Column="1" Grid.Row="3" Text="Play" 
                VerticalAlignment="Bottom" HorizontalAlignment="Center"
-               Foreground="#bdc3c7" FontSize="20"
+               Foreground="{Binding Source={x:Static local:GlobalColors.LightGray}}" FontSize="20"
                MouseLeftButtonUp="ButtonPlay_MouseLeftButtonUp"
                MouseEnter="ButtonPlay_MouseEnter" 
                MouseLeave="ButtonPlay_MouseLeave"
