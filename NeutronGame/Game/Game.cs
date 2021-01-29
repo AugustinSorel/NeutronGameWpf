@@ -1,8 +1,6 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 namespace NeutronGame
@@ -93,6 +91,13 @@ namespace NeutronGame
             {
                 if (!tokenSelected)
                 {
+                    if (player1Turn && (sender as Ellipse).Fill.ToString() == GlobalColors.TokenPlayer2.ToString() ||
+                        !player1Turn && (sender as Ellipse).Fill.ToString() == GlobalColors.TokenPlayer1.ToString())
+                    {
+                        MessageBox.Show("Wrong Piece");
+                        return;
+                    }
+
                     gameTimer.StartTimer();
                     tokenSelected = true;
                     ellipseSelected = sender as Ellipse;
