@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 namespace NeutronGame
@@ -33,6 +35,7 @@ namespace NeutronGame
         private bool player1Turn;
         private bool tokenSelected;
         private GameTimer gameTimer;
+        private Ellipse ellipseSelected;
 
         #endregion
 
@@ -71,28 +74,34 @@ namespace NeutronGame
 
         #region Handle Token click Event
 
-        public void HandleTokenClick()
+        public void HandleTokenClick(object sender)
         {
-            gameTimer.StartTimer();
-
-            if (tokenSelected)
+            if (sender is Button)
             {
-                // move the token
-                
+                if (!tokenSelected)
+                    return;
 
-
+                Grid.SetColumn(ellipseSelected, Grid.GetColumn(sender as Button));
+                Grid.SetRow(ellipseSelected, Grid.GetRow(sender as Button));
 
                 player1Turn ^= true;
                 SetLabelsColor();
                 tokenSelected = false;
+
             }
-            else
+            else if (sender is Ellipse)
             {
-                tokenSelected = true;
+                if (!tokenSelected)
+                {
+                    gameTimer.StartTimer();
+                    tokenSelected = true;
+                    ellipseSelected = sender as Ellipse;
+                }
+                else
+                {
+                    tokenSelected = false;
+                }
             }
-
-
-
         }
 
         #endregion

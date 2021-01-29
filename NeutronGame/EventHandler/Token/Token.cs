@@ -24,7 +24,7 @@ namespace NeutronGame
 
         private void Ellipse_Click(object sender, EventArgs e)
         {
-            Game.Instance.HandleTokenClick();
+            Game.Instance.HandleTokenClick(sender);
         }
 
         #endregion
