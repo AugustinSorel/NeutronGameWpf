@@ -8,7 +8,7 @@ namespace NeutronGame
         private static Timer _timer;
         private static Stopwatch _stopWatch;
 
-        public GameTimer()
+        public GameTimer(GameUserControl gameUserControl)
         {
             _timer = new Timer
             {
@@ -20,7 +20,7 @@ namespace NeutronGame
 
             _timer.Enabled = false;
 
-            GameUserControl.Instance.LabelTimer.Content = "00:00:00";
+            gameUserControl.LabelTimer.Content = "00:00:00";
         }
 
         internal void StartTimer()

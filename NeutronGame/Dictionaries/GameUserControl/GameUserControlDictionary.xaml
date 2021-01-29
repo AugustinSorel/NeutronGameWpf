@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:NeutronGame">
+                    xmlns:local="clr-namespace:NeutronGame"
+                    x:Class="NeutronGame.CellBoardEventHandler">
     <!--Label Style-->
     <Style TargetType="Label">
         <Setter Property="FontSize" Value="20" />
@@ -27,5 +28,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <EventSetter Event="Click" Handler="CellBoard_Click" />
     </Style>
 </ResourceDictionary>

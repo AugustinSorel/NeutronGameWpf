@@ -31,6 +31,8 @@ namespace NeutronGame
         #region Game Fields
 
         private bool player1Turn;
+        private bool tokenSelected;
+        private GameTimer gameTimer;
 
         #endregion
 
@@ -41,10 +43,10 @@ namespace NeutronGame
             this.gameUserControl = gameUserControl;
             InitGameBoard();
             SetGameVariable();
-            SetLabelColor();
+            SetLabelsColor();
         }
 
-        private void SetLabelColor()
+        private void SetLabelsColor()
         {
             if (player1Turn)
             {
@@ -62,6 +64,8 @@ namespace NeutronGame
         private void SetGameVariable()
         {
             player1Turn = true;
+            tokenSelected = false;
+            gameTimer = new GameTimer(gameUserControl);
         }
         #endregion
 
@@ -69,7 +73,26 @@ namespace NeutronGame
 
         public void HandleTokenClick()
         {
-            MessageBox.Show("Test");
+            gameTimer.StartTimer();
+
+            if (tokenSelected)
+            {
+                // move the token
+                
+
+
+
+                player1Turn ^= true;
+                SetLabelsColor();
+                tokenSelected = false;
+            }
+            else
+            {
+                tokenSelected = true;
+            }
+
+
+
         }
 
         #endregion
