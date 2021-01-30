@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -72,15 +73,63 @@ namespace NeutronGame
 
         #region Handle Token click Event
 
-        public void HandleTokenClick(object sender)
+        public async void HandleTokenClick(object sender)
         {
             if (sender is Button)
             {
                 if (!tokenSelected)
                     return;
 
-                Grid.SetColumn(ellipseSelected, Grid.GetColumn(sender as Button));
-                Grid.SetRow(ellipseSelected, Grid.GetRow(sender as Button));
+                var goToCol = Grid.GetColumn(sender as Button);
+                var goToRow = Grid.GetRow(sender as Button);
+
+                while (true)
+                {
+                    var currentRow = Grid.GetRow(ellipseSelected);
+
+                    
+                    var y = goToRow - currentRow;
+
+                    if (y == 0) 
+                        break;
+
+                    if (y < 0)
+                    {
+                        Grid.SetRow(ellipseSelected, currentRow - 1);
+                        await Task.Delay(500);
+                    }
+                    else if (y > 0) 
+                    {
+                        Grid.SetRow(ellipseSelected, currentRow + 1);
+                        await Task.Delay(500);
+                    }
+                }
+
+                while (true)
+                {
+                    var currentCol = Grid.GetColumn(ellipseSelected);
+                    var x = goToCol - currentCol;
+
+                    if (x == 0)
+                        break;
+
+                    if (x < 0)
+                    {
+                        Grid.SetColumn(ellipseSelected, currentCol - 1);
+                        await Task.Delay(500);
+                    }
+                    else if (x > 0)
+                    {
+                        Grid.SetColumn(ellipseSelected, currentCol + 1);
+                        await Task.Delay(500);
+                    }
+                }
+
+
+
+
+                //Grid.SetColumn(ellipseSelected, Grid.GetColumn(sender as Button));
+                //Grid.SetRow(ellipseSelected, Grid.GetRow(sender as Button));
 
                 player1Turn ^= true;
                 SetLabelsColor();
