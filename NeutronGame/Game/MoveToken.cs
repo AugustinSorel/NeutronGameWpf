@@ -10,52 +10,29 @@ namespace NeutronGame
         private readonly Ellipse ellipseSelected;
         private const int DEFAULT_ANIMATION_SPEED = 500;
 
-        private readonly int goToCol; 
+        private readonly int goToCol;
         private readonly int goToRow;
 
-        private readonly int currentRow;
-        private readonly int currentCol;
-        
-        public MoveToken(object sender, Ellipse ellipseSelected)
+        public MoveToken(object sender, Ellipse ellipseSelected, EnumMoveDirection moveDirection)
         {
             this.ellipseSelected = ellipseSelected;
 
             goToCol = Grid.GetColumn(sender as Button);
             goToRow = Grid.GetRow(sender as Button);
 
-            currentRow = Grid.GetRow(ellipseSelected);
-            currentCol = Grid.GetColumn(ellipseSelected);
-
-            if (MoveIsDiagonal())
+            if (moveDirection == EnumMoveDirection.Diag)
             {
                 MoveDiag();
             }
-            else if (MoveIsVertically())
+            else if (moveDirection == EnumMoveDirection.Vertical)
             {
                 MoveVertically();
             }
-            else if (MoveIsHorizontally())
+            else if (moveDirection == EnumMoveDirection.Horizontal)
             {
                 MoveHorizontally();
             }
         }
-
-        #region Check Move
-        private bool MoveIsDiagonal()
-        {
-            return MoveIsHorizontally() && MoveIsVertically();
-        }
-
-        private bool MoveIsHorizontally()
-        {
-            return Math.Abs(goToCol - currentCol) > 0;
-        }
-
-        private bool MoveIsVertically()
-        {
-            return Math.Abs(goToRow - currentRow) > 0;
-        }
-        #endregion
 
         #region Move Vertically
         private async void MoveVertically()

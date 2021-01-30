@@ -61,6 +61,7 @@
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\InitGameBoard.cs" />
     <Compile Include="Game\MoveToken.cs" />
+    <Compile Include="Game\TokenMovement.cs" />
     <Compile Include="Global\GlobalColors.cs" />
     <Compile Include="InputUserControl\HandleButtonPlayClick.cs" />
     <Compile Include="EventHandler\Token\Token.cs" />

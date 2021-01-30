@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -35,6 +36,7 @@ namespace NeutronGame
         private GameTimer gameTimer;
         private Ellipse ellipseSelected;
         EnumBoard[,] enumBoard;
+        EnumMoveDirection enumMoveDirection;
 
         #endregion
 
@@ -81,10 +83,13 @@ namespace NeutronGame
                 if (!tokenSelected)
                     return;
 
-                //if (IllegalMove())
-                //    return;
+                enumMoveDirection = GetMoveDirection(sender);
 
-                new MoveToken(sender, ellipseSelected);
+                if (IllegalMove(sender))
+                    return;
+
+                new MoveToken(sender, ellipseSelected, enumMoveDirection);
+                UpdateEnumBoard(sender);
 
                 player1Turn ^= true;
                 SetLabelsColor();
@@ -113,12 +118,27 @@ namespace NeutronGame
             }
         }
 
-        private bool IllegalMove()
+        private EnumMoveDirection GetMoveDirection(object sender)
         {
-            foreach (var item in enumBoard)
-            {
-                MessageBox.Show(item.ToString());
-            }
+            TokenMovement tokenMovement = new TokenMovement(sender, ellipseSelected);
+            return tokenMovement.GetMovementDirection();
+        }
+
+        private void UpdateEnumBoard(object sender)
+        {
+            // update the enu...
+        }
+
+        private bool IllegalMove(object sender)
+        {
+            //foreach (var item in enumBoard)
+            //{
+            //    MessageBox.Show(item.ToString());
+            //}
+
+
+            // check vertically
+            
 
             return false;
         }
@@ -133,5 +153,12 @@ namespace NeutronGame
         }
         
         #endregion
+    }
+
+    public enum EnumMoveDirection
+    {
+        Horizontal,
+        Vertical,
+        Diag,
     }
 }
