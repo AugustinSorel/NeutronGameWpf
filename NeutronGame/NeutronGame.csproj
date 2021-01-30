@@ -56,8 +56,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="EventHandler\CellBoard\CellBoardEventHandler.cs" />
+    <Compile Include="Game\EnumBoard.cs" />
     <Compile Include="Game\GameTimer.cs" />
     <Compile Include="Game\Game.cs" />
+    <Compile Include="Game\InitGameBoard.cs" />
     <Compile Include="Global\GlobalColors.cs" />
     <Compile Include="InputUserControl\HandleButtonPlayClick.cs" />
     <Compile Include="EventHandler\Token\Token.cs" />

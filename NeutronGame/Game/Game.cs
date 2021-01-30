@@ -129,8 +129,8 @@ namespace NeutronGame
                 if (!tokenSelected)
                     return;
 
-                if (IllegalMove())
-                    return;
+                //if (IllegalMove())
+                //    return;
 
                 int goToCol = Grid.GetColumn(sender as Button);
                 int goToRow = Grid.GetRow(sender as Button);
@@ -222,54 +222,12 @@ namespace NeutronGame
         #endregion
 
         #region Init The Default Game Board;
+
         private void InitGameBoard()
         {
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    if (i == 0 || i == 4 || (i == 2 && j == 2))
-                    {
-
-                        Style EllipseStyle;
-
-                        if (i == 0)
-                        {
-                            EllipseStyle = gameUserControl.FindResource("EllipsePlayer1") as Style;
-                            enumBoard[i, j] = EnumBoard.Player1Token;
-                        }
-                        else if (i == 4)
-                        {
-                            EllipseStyle = gameUserControl.FindResource("EllipsePlayer2") as Style;
-                            enumBoard[i, j] = EnumBoard.Player2Token;
-                        }
-                        else
-                        {
-                            EllipseStyle = gameUserControl.FindResource("EllipseNeutron") as Style;
-                            enumBoard[i, j] = EnumBoard.NeutronToken;
-                        }
-
-                        Ellipse ellipse = new Ellipse
-                        {
-                            Style = EllipseStyle
-                        };
-                        gameUserControl.GameBoard.Children.Add(ellipse);
-                        Grid.SetColumn(ellipse, j);
-                        Grid.SetRow(ellipse, i);
-                    }
-                    else
-                        enumBoard[i, j] = EnumBoard.EmptyCell;
-                }
-            }
+            new InitGameBoard(gameUserControl, enumBoard);
         }
+        
         #endregion
-    }
-
-    public enum EnumBoard
-    {
-        Player1Token,
-        Player2Token,
-        NeutronToken,
-        EmptyCell,
     }
 }
