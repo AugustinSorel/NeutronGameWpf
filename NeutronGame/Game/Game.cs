@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -35,6 +36,7 @@ namespace NeutronGame
         private bool tokenSelected;
         private GameTimer gameTimer;
         private Ellipse ellipseSelected;
+        EnumBoard[,] enumBoard;
 
         #endregion
 
@@ -43,8 +45,8 @@ namespace NeutronGame
         public void StartNewGame(GameUserControl gameUserControl)
         {
             this.gameUserControl = gameUserControl;
-            InitGameBoard();
             SetGameVariable();
+            InitGameBoard();
             SetLabelsColor();
         }
 
@@ -65,6 +67,7 @@ namespace NeutronGame
 
         private void SetGameVariable()
         {
+            enumBoard = new EnumBoard[5, 5];
             player1Turn = true;
             tokenSelected = false;
             gameTimer = new GameTimer(gameUserControl);
@@ -73,63 +76,80 @@ namespace NeutronGame
 
         #region Handle Token click Event
 
-        public async void HandleTokenClick(object sender)
+        private async void MoveVertically(int goToRow)
+        {
+            while (true)
+            {
+                int currentRow = Grid.GetRow(ellipseSelected);
+                int y = goToRow - currentRow;
+
+                if (y == 0)
+                    break;
+
+                if (y < 0)
+                {
+                    Grid.SetRow(ellipseSelected, currentRow - 1);
+                    await Task.Delay(500);
+                }
+                else if (y > 0)
+                {
+                    Grid.SetRow(ellipseSelected, currentRow + 1);
+                    await Task.Delay(500);
+                }
+            }
+        }
+
+        private async void MoveHorizontally(int goToCol)
+        {
+            while (true)
+            {
+                int currentCol = Grid.GetColumn(ellipseSelected);
+                int x = goToCol - currentCol;
+
+                if (x == 0)
+                    break;
+
+                if (x < 0)
+                {
+                    Grid.SetColumn(ellipseSelected, currentCol - 1);
+                    await Task.Delay(500);
+                }
+                else if (x > 0)
+                {
+                    Grid.SetColumn(ellipseSelected, currentCol + 1);
+                    await Task.Delay(500);
+                }
+            }
+        }
+
+        public void HandleTokenClick(object sender)
         {
             if (sender is Button)
             {
                 if (!tokenSelected)
                     return;
 
-                var goToCol = Grid.GetColumn(sender as Button);
-                var goToRow = Grid.GetRow(sender as Button);
+                if (IllegalMove())
+                    return;
 
-                while (true)
+                int goToCol = Grid.GetColumn(sender as Button);
+                int goToRow = Grid.GetRow(sender as Button);
+
+                int currentRow1 = Grid.GetRow(ellipseSelected);
+                int currentCol1 = Grid.GetColumn(ellipseSelected);
+
+                if (Math.Abs(goToRow - currentRow1) > 0 && Math.Abs(goToCol - currentCol1) > 0)
                 {
-                    var currentRow = Grid.GetRow(ellipseSelected);
-
-                    
-                    var y = goToRow - currentRow;
-
-                    if (y == 0) 
-                        break;
-
-                    if (y < 0)
-                    {
-                        Grid.SetRow(ellipseSelected, currentRow - 1);
-                        await Task.Delay(500);
-                    }
-                    else if (y > 0) 
-                    {
-                        Grid.SetRow(ellipseSelected, currentRow + 1);
-                        await Task.Delay(500);
-                    }
+                    MoveDiag(goToCol, goToRow);
                 }
-
-                while (true)
+                else if (Math.Abs(goToRow - currentRow1) > 0)
                 {
-                    var currentCol = Grid.GetColumn(ellipseSelected);
-                    var x = goToCol - currentCol;
-
-                    if (x == 0)
-                        break;
-
-                    if (x < 0)
-                    {
-                        Grid.SetColumn(ellipseSelected, currentCol - 1);
-                        await Task.Delay(500);
-                    }
-                    else if (x > 0)
-                    {
-                        Grid.SetColumn(ellipseSelected, currentCol + 1);
-                        await Task.Delay(500);
-                    }
+                    MoveVertically(goToRow);
                 }
-
-
-
-
-                //Grid.SetColumn(ellipseSelected, Grid.GetColumn(sender as Button));
-                //Grid.SetRow(ellipseSelected, Grid.GetRow(sender as Button));
+                else if (Math.Abs(goToCol - currentCol1) > 0)
+                {
+                    MoveHorizontally(goToCol);
+                }
 
                 player1Turn ^= true;
                 SetLabelsColor();
@@ -158,6 +178,47 @@ namespace NeutronGame
             }
         }
 
+        private bool IllegalMove()
+        {
+            foreach (var item in enumBoard)
+            {
+                MessageBox.Show(item.ToString());
+            }
+
+            return false;
+        }
+
+        private async void MoveDiag(int goToCol, int goToRow)
+        {
+            while (true)
+            {
+                int currentRow = Grid.GetRow(ellipseSelected);
+                int currentCol = Grid.GetColumn(ellipseSelected);
+
+                int y = goToRow - currentRow;
+                int x = goToCol - currentCol;
+
+                if (y == 0 && x == 0)
+                    break;
+
+                if (x < 0)
+                    Grid.SetColumn(ellipseSelected, currentCol - 1);
+                else if (x > 0)
+                    Grid.SetColumn(ellipseSelected, currentCol + 1);
+
+                if (y < 0)
+                {
+                    Grid.SetRow(ellipseSelected, currentRow - 1);
+                    await Task.Delay(500);
+                }
+                else if (y > 0)
+                {
+                    Grid.SetRow(ellipseSelected, currentRow + 1);
+                    await Task.Delay(500);
+                }
+            }
+        }
+
         #endregion
 
         #region Init The Default Game Board;
@@ -173,11 +234,20 @@ namespace NeutronGame
                         Style EllipseStyle;
 
                         if (i == 0)
+                        {
                             EllipseStyle = gameUserControl.FindResource("EllipsePlayer1") as Style;
+                            enumBoard[i, j] = EnumBoard.Player1Token;
+                        }
                         else if (i == 4)
+                        {
                             EllipseStyle = gameUserControl.FindResource("EllipsePlayer2") as Style;
+                            enumBoard[i, j] = EnumBoard.Player2Token;
+                        }
                         else
+                        {
                             EllipseStyle = gameUserControl.FindResource("EllipseNeutron") as Style;
+                            enumBoard[i, j] = EnumBoard.NeutronToken;
+                        }
 
                         Ellipse ellipse = new Ellipse
                         {
@@ -187,9 +257,19 @@ namespace NeutronGame
                         Grid.SetColumn(ellipse, j);
                         Grid.SetRow(ellipse, i);
                     }
+                    else
+                        enumBoard[i, j] = EnumBoard.EmptyCell;
                 }
             }
         }
         #endregion
+    }
+
+    public enum EnumBoard
+    {
+        Player1Token,
+        Player2Token,
+        NeutronToken,
+        EmptyCell,
     }
 }
