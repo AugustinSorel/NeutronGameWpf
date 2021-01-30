@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -86,7 +84,7 @@ namespace NeutronGame
                 //if (IllegalMove())
                 //    return;
 
-                new MoveToke(sender, ellipseSelected);
+                new MoveToken(sender, ellipseSelected);
 
                 player1Turn ^= true;
                 SetLabelsColor();

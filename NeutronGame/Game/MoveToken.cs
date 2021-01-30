@@ -5,35 +5,60 @@ using System.Windows.Shapes;
 
 namespace NeutronGame
 {
-    internal class MoveToke
+    internal class MoveToken
     {
         private readonly Ellipse ellipseSelected;
+        private const int DEFAULT_ANIMATION_SPEED = 500;
 
-        public MoveToke(object sender, Ellipse ellipseSelected)
+        private readonly int goToCol; 
+        private readonly int goToRow;
+
+        private readonly int currentRow;
+        private readonly int currentCol;
+        
+        public MoveToken(object sender, Ellipse ellipseSelected)
         {
             this.ellipseSelected = ellipseSelected;
 
-            int goToCol = Grid.GetColumn(sender as Button);
-            int goToRow = Grid.GetRow(sender as Button);
+            goToCol = Grid.GetColumn(sender as Button);
+            goToRow = Grid.GetRow(sender as Button);
 
-            int currentRow1 = Grid.GetRow(ellipseSelected);
-            int currentCol1 = Grid.GetColumn(ellipseSelected);
+            currentRow = Grid.GetRow(ellipseSelected);
+            currentCol = Grid.GetColumn(ellipseSelected);
 
-            if (Math.Abs(goToRow - currentRow1) > 0 && Math.Abs(goToCol - currentCol1) > 0)
+            if (MoveIsDiagonal())
             {
-                MoveDiag(goToCol, goToRow);
+                MoveDiag();
             }
-            else if (Math.Abs(goToRow - currentRow1) > 0)
+            else if (MoveIsVertically())
             {
-                MoveVertically(goToRow);
+                MoveVertically();
             }
-            else if (Math.Abs(goToCol - currentCol1) > 0)
+            else if (MoveIsHorizontally())
             {
-                MoveHorizontally(goToCol);
+                MoveHorizontally();
             }
         }
 
-        private async void MoveVertically(int goToRow)
+        #region Check Move
+        private bool MoveIsDiagonal()
+        {
+            return MoveIsHorizontally() && MoveIsVertically();
+        }
+
+        private bool MoveIsHorizontally()
+        {
+            return Math.Abs(goToCol - currentCol) > 0;
+        }
+
+        private bool MoveIsVertically()
+        {
+            return Math.Abs(goToRow - currentRow) > 0;
+        }
+        #endregion
+
+        #region Move Vertically
+        private async void MoveVertically()
         {
             while (true)
             {
@@ -46,17 +71,19 @@ namespace NeutronGame
                 if (y < 0)
                 {
                     Grid.SetRow(ellipseSelected, currentRow - 1);
-                    await Task.Delay(500);
+                    await Task.Delay(DEFAULT_ANIMATION_SPEED);
                 }
                 else if (y > 0)
                 {
                     Grid.SetRow(ellipseSelected, currentRow + 1);
-                    await Task.Delay(500);
+                    await Task.Delay(DEFAULT_ANIMATION_SPEED);
                 }
             }
         }
+        #endregion
 
-        private async void MoveHorizontally(int goToCol)
+        #region Move Horizontally
+        private async void MoveHorizontally()
         {
             while (true)
             {
@@ -69,17 +96,19 @@ namespace NeutronGame
                 if (x < 0)
                 {
                     Grid.SetColumn(ellipseSelected, currentCol - 1);
-                    await Task.Delay(500);
+                    await Task.Delay(DEFAULT_ANIMATION_SPEED);
                 }
                 else if (x > 0)
                 {
                     Grid.SetColumn(ellipseSelected, currentCol + 1);
-                    await Task.Delay(500);
+                    await Task.Delay(DEFAULT_ANIMATION_SPEED);
                 }
             }
         }
+        #endregion
 
-        private async void MoveDiag(int goToCol, int goToRow)
+        #region Move Diag
+        private async void MoveDiag()
         {
             while (true)
             {
@@ -100,14 +129,15 @@ namespace NeutronGame
                 if (y < 0)
                 {
                     Grid.SetRow(ellipseSelected, currentRow - 1);
-                    await Task.Delay(500);
+                    await Task.Delay(DEFAULT_ANIMATION_SPEED);
                 }
                 else if (y > 0)
                 {
                     Grid.SetRow(ellipseSelected, currentRow + 1);
-                    await Task.Delay(500);
+                    await Task.Delay(DEFAULT_ANIMATION_SPEED);
                 }
             }
         }
+        #endregion
     }
 }
