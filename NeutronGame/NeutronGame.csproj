@@ -60,6 +60,7 @@
     <Compile Include="Game\GameTimer.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\InitGameBoard.cs" />
+    <Compile Include="Game\MoveToke.cs" />
     <Compile Include="Global\GlobalColors.cs" />
     <Compile Include="InputUserControl\HandleButtonPlayClick.cs" />
     <Compile Include="EventHandler\Token\Token.cs" />
@@ -132,6 +133,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Game\HandleTokenClick\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
