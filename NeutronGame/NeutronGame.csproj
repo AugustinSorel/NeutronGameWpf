@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="EventHandler\CellBoard\CellBoardEventHandler.cs" />
     <Compile Include="Game\EnumBoard.cs" />
+    <Compile Include="Game\EnumMoveDirection.cs" />
     <Compile Include="Game\GameTimer.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\InitGameBoard.cs" />

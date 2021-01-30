@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -110,12 +111,36 @@ namespace NeutronGame
                     gameTimer.StartTimer();
                     tokenSelected = true;
                     ellipseSelected = sender as Ellipse;
+                    DisplayPieceSelected();
                 }
                 else
                 {
                     tokenSelected = false;
                 }
             }
+        }
+
+        private void DisplayPieceSelected()
+        {
+            int startCol = Grid.GetColumn(ellipseSelected);
+            int startRow = Grid.GetRow(ellipseSelected);
+
+            // Check Vertically
+
+            if (enumBoard[startCol, startRow + 1] == EnumBoard.EmptyCell) 
+            {
+                var elements = gameUserControl.GameBoard.Children.Cast<Button>().
+                            First(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow + 1);
+
+
+                var eelement = gameUserControl.GameBoard.Children
+                       .OfType<Button>()
+                       .Where(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow + 1)
+                       .FirstOrDefault();
+
+                eelement.Style = gameUserControl.FindResource("SelectedButton") as Style;
+            }
+
         }
 
         private EnumMoveDirection GetMoveDirection(object sender)
@@ -136,10 +161,6 @@ namespace NeutronGame
             //    MessageBox.Show(item.ToString());
             //}
 
-
-            // check vertically
-            
-
             return false;
         }
 
@@ -153,12 +174,5 @@ namespace NeutronGame
         }
         
         #endregion
-    }
-
-    public enum EnumMoveDirection
-    {
-        Horizontal,
-        Vertical,
-        Diag,
     }
 }

@@ -33,7 +33,7 @@ namespace NeutronGame
 
         private void SetEnumBoardToEmptyCell(int i, int j)
         {
-            enumBoard[i, j] = EnumBoard.EmptyCell;
+            enumBoard[j, i] = EnumBoard.EmptyCell;
         }
 
         private void CreateAToken(int i, int j)
@@ -53,11 +53,11 @@ namespace NeutronGame
         private void SetEnumBoard(int i, int j)
         {
             if (FirstRow(i))
-                enumBoard[i, j] = EnumBoard.Player1Token;
+                enumBoard[j, i] = EnumBoard.Player1Token;
             else if (LastRow(i))
-                enumBoard[i, j] = EnumBoard.Player2Token;
+                enumBoard[j, i] = EnumBoard.Player2Token;
             else
-                enumBoard[i, j] = EnumBoard.NeutronToken;
+                enumBoard[j, i] = EnumBoard.NeutronToken;
         }
 
         private Style GetEllipseStyle(int i)
