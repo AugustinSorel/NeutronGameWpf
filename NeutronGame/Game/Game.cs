@@ -125,22 +125,61 @@ namespace NeutronGame
             int startCol = Grid.GetColumn(ellipseSelected);
             int startRow = Grid.GetRow(ellipseSelected);
 
-            // Check Vertically
+            // Check down
+            DrawUp(startCol, startRow);
+            DrawDown(startCol, startRow);
+            
 
-            if (enumBoard[startCol, startRow + 1] == EnumBoard.EmptyCell) 
+        }
+
+        private void DrawDown(int startCol, int startRow)
+        {
+            for (int i = 1; i < 5; i++)
             {
-                var elements = gameUserControl.GameBoard.Children.Cast<Button>().
-                            First(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow + 1);
+                if (startRow - i < 0)
+                    return;
+
+                if (enumBoard[startCol, startRow - i] != EnumBoard.EmptyCell)
+                {
+                    var elements = gameUserControl.GameBoard.Children.Cast<Button>().
+                                First(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow - i + 1);
 
 
-                var eelement = gameUserControl.GameBoard.Children
-                       .OfType<Button>()
-                       .Where(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow + 1)
-                       .FirstOrDefault();
+                    var eelement = gameUserControl.GameBoard.Children
+                           .OfType<Button>()
+                           .Where(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow - i + 1)
+                           .FirstOrDefault();
 
-                eelement.Style = gameUserControl.FindResource("SelectedButton") as Style;
+                    eelement.Style = gameUserControl.FindResource("SelectedButton") as Style;
+
+                    return;
+                }
             }
+        }
 
+        private void DrawUp(int startCol, int startRow)
+        {
+            for (int i = 1; i < 5; i++)
+            {
+                if (startRow + i > 4)
+                    return;
+
+                if (enumBoard[startCol, startRow + i] != EnumBoard.EmptyCell)
+                {
+                    var elements = gameUserControl.GameBoard.Children.Cast<Button>().
+                                First(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow + i - 1);
+
+
+                    var eelement = gameUserControl.GameBoard.Children
+                           .OfType<Button>()
+                           .Where(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow + i - 1)
+                           .FirstOrDefault();
+
+                    eelement.Style = gameUserControl.FindResource("SelectedButton") as Style;
+
+                    return;
+                }
+            }
         }
 
         private EnumMoveDirection GetMoveDirection(object sender)

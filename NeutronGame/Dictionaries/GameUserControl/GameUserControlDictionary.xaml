@@ -37,8 +37,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border Name="border" 
-                        BorderThickness="1"
-                        BorderBrush="Green" 
+                        BorderThickness="2"
+                        BorderBrush="#2ecc71" 
                         Background="#353b48">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
@@ -52,7 +52,7 @@
             <EventTrigger RoutedEvent="MouseEnter">
                 <BeginStoryboard>
                     <Storyboard>
-                        <DoubleAnimation Storyboard.TargetProperty="Height" From="71.33" To="63.33" Duration="0:0:0:1" ></DoubleAnimation>
+                        <DoubleAnimation Storyboard.TargetProperty="Height" From="80" To="63.33" Duration="0:0:0:1" ></DoubleAnimation>
                         <DoubleAnimation Storyboard.TargetProperty="Width" From="92" To="82" Duration="0:0:0:1" ></DoubleAnimation>
                     </Storyboard>
                 </BeginStoryboard>
