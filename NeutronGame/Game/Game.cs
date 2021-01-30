@@ -89,8 +89,8 @@ namespace NeutronGame
                 if (IllegalMove(sender))
                     return;
 
-                new MoveToken(sender, ellipseSelected, enumMoveDirection);
                 UpdateEnumBoard(sender);
+                new MoveToken(sender, ellipseSelected, enumMoveDirection);
 
                 player1Turn ^= true;
                 SetLabelsColor();
@@ -190,7 +190,12 @@ namespace NeutronGame
 
         private void UpdateEnumBoard(object sender)
         {
-            // update the enu...
+            enumBoard[Grid.GetColumn(ellipseSelected), Grid.GetRow(ellipseSelected)] = EnumBoard.EmptyCell;
+
+            if (player1Turn)
+                enumBoard[Grid.GetColumn(sender as Button), Grid.GetRow(sender as Button)] = EnumBoard.Player1Token;
+            else
+                enumBoard[Grid.GetColumn(sender as Button), Grid.GetRow(sender as Button)] = EnumBoard.Player2Token;
         }
 
         private bool IllegalMove(object sender)
