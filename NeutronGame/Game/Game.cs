@@ -115,6 +115,10 @@ namespace NeutronGame
                 }
                 else
                 {
+                    foreach (var button in gameUserControl.GameBoard.Children.OfType<Button>())
+                    {
+                        button.Style = gameUserControl.TryFindResource(typeof(Button)) as Style;
+                    }
                     tokenSelected = false;
                 }
             }
@@ -125,7 +129,7 @@ namespace NeutronGame
             int startCol = Grid.GetColumn(ellipseSelected);
             int startRow = Grid.GetRow(ellipseSelected);
 
-            // Check down
+
             DrawUp(startCol, startRow);
             DrawDown(startCol, startRow);
             
@@ -133,31 +137,6 @@ namespace NeutronGame
         }
 
         private void DrawDown(int startCol, int startRow)
-        {
-            for (int i = 1; i < 5; i++)
-            {
-                if (startRow - i < 0)
-                    return;
-
-                if (enumBoard[startCol, startRow - i] != EnumBoard.EmptyCell)
-                {
-                    var elements = gameUserControl.GameBoard.Children.Cast<Button>().
-                                First(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow - i + 1);
-
-
-                    var eelement = gameUserControl.GameBoard.Children
-                           .OfType<Button>()
-                           .Where(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow - i + 1)
-                           .FirstOrDefault();
-
-                    eelement.Style = gameUserControl.FindResource("SelectedButton") as Style;
-
-                    return;
-                }
-            }
-        }
-
-        private void DrawUp(int startCol, int startRow)
         {
             for (int i = 1; i < 5; i++)
             {
@@ -173,6 +152,51 @@ namespace NeutronGame
                     var eelement = gameUserControl.GameBoard.Children
                            .OfType<Button>()
                            .Where(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow + i - 1)
+                           .FirstOrDefault();
+
+                    eelement.Style = gameUserControl.FindResource("SelectedButton") as Style;
+
+                    return;
+                }
+
+                if (startRow + i == 4)
+                {
+                    var eelement = gameUserControl.GameBoard.Children
+                           .OfType<Button>()
+                           .Where(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow + i)
+                           .FirstOrDefault();
+
+                    eelement.Style = gameUserControl.FindResource("SelectedButton") as Style;
+
+                    return;
+                }
+            }
+        }
+
+        private void DrawUp(int startCol, int startRow)
+        {
+            for (int i = 1; i < 5; i++)
+            {
+                if (startRow - i < 0)
+                    return;
+
+                if (enumBoard[startCol, startRow - i] != EnumBoard.EmptyCell)
+                {
+                    var eelement = gameUserControl.GameBoard.Children
+                           .OfType<Button>()
+                           .Where(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow - i + 1)
+                           .FirstOrDefault();
+
+                    eelement.Style = gameUserControl.FindResource("SelectedButton") as Style;
+
+                    return;
+                }
+
+                if (startRow - i == 0)
+                {
+                    var eelement = gameUserControl.GameBoard.Children
+                           .OfType<Button>()
+                           .Where(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow - i)
                            .FirstOrDefault();
 
                     eelement.Style = gameUserControl.FindResource("SelectedButton") as Style;
@@ -200,10 +224,14 @@ namespace NeutronGame
 
         private bool IllegalMove(object sender)
         {
-            //foreach (var item in enumBoard)
-            //{
-            //    MessageBox.Show(item.ToString());
-            //}
+            int row = Grid.GetRow((sender as Button));
+            int col = Grid.GetColumn((sender as Button));
+
+            if (enumBoard[col, row] != EnumBoard.EmptyCell)
+            {
+                MessageBox.Show("Wrong move");
+                return true;
+            }
 
             return false;
         }

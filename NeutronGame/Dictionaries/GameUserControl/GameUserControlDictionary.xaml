@@ -9,7 +9,7 @@
         <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
     <!--Button Style-->
-    <Style TargetType="Button">
+    <Style TargetType="Button" x:Key="{x:Type Button}">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
