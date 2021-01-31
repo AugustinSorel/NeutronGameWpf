@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
@@ -24,6 +23,9 @@ namespace NeutronGame
             DrawRight(startCol, startRow);
 
             DrawDiagTopLeft(startCol, startRow);
+            DrawDiagTopRight(startCol, startRow);
+            DrawDiagBottomLeft(startCol, startRow);
+            DrawDiagBottomRight(startCol, startRow);
         }
 
         private Button GetAllowedButton(int x, int y)
@@ -56,6 +58,90 @@ namespace NeutronGame
         private bool TopWallHited(int startRow, int i)
         {
             return startRow - i == 0;
+        }
+
+        #endregion
+
+        #region Draw Diag Bottom Right
+
+        private void DrawDiagBottomRight(int startCol, int startRow)
+        {
+            for (int i = 1; i < 5; i++)
+            {
+                if (startCol + i > 4 || startRow + i > 4)
+                    return;
+
+                if (DistanceBetweenTokenIs1(startCol + 1, startRow + 1))
+                    return;
+
+                if (CellNotEmpty(startCol + i, startRow + i))
+                {
+                    GetAllowedButton(startCol + i - 1, startRow + i - 1).Style = GameUserControl.Instance.FindResource("SelectedButton") as Style;
+                    return;
+                }
+
+                if (BottomWallHited(startCol, i) || BottomWallHited(startRow, i))
+                {
+                    GetAllowedButton(startCol + i, startRow + i).Style = GameUserControl.Instance.FindResource("SelectedButton") as Style;
+                    return;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Draw Diag Bottom Left
+
+        private void DrawDiagBottomLeft(int startCol, int startRow)
+        {
+            for (int i = 1; i < 5; i++)
+            {
+                if (startCol - i < 0 || startRow + i > 4)
+                    return;
+
+                if (DistanceBetweenTokenIs1(startCol - 1, startRow + 1))
+                    return;
+
+                if (CellNotEmpty(startCol - i, startRow + i))
+                {
+                    GetAllowedButton(startCol - i + 1, startRow + i - 1).Style = GameUserControl.Instance.FindResource("SelectedButton") as Style;
+                    return;
+                }
+
+                if (TopWallHited(startCol, i) || BottomWallHited(startRow, i))
+                {
+                    GetAllowedButton(startCol - i, startRow + i).Style = GameUserControl.Instance.FindResource("SelectedButton") as Style;
+                    return;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Draw Diag Top Right
+
+        private void DrawDiagTopRight(int startCol, int startRow)
+        {
+            for (int i = 1; i < 5; i++)
+            {
+                if (startCol + i > 4 || startRow - i < 0)
+                    return;
+
+                if (DistanceBetweenTokenIs1(startCol + 1, startRow - 1))
+                    return;
+
+                if (CellNotEmpty(startCol + i, startRow - i))
+                {
+                    GetAllowedButton(startCol + i - 1, startRow - i + 1).Style = GameUserControl.Instance.FindResource("SelectedButton") as Style;
+                    return;
+                }
+
+                if (BottomWallHited(startCol, i) || TopWallHited(startRow, i))
+                {
+                    GetAllowedButton(startCol + i, startRow - i).Style = GameUserControl.Instance.FindResource("SelectedButton") as Style;
+                    return;
+                }
+            }
         }
 
         #endregion
