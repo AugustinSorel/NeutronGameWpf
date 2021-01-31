@@ -33,7 +33,6 @@ namespace NeutronGame
         #region Game Fields
 
         private bool player1Turn;
-        private bool tokenSelected;
         private GameTimer gameTimer;
         private Ellipse ellipseSelected;
         EnumBoard[,] enumBoard;
@@ -70,7 +69,6 @@ namespace NeutronGame
         {
             enumBoard = new EnumBoard[5, 5];
             player1Turn = true;
-            tokenSelected = false;
             gameTimer = new GameTimer(gameUserControl);
         }
         #endregion
@@ -81,9 +79,6 @@ namespace NeutronGame
         {
             if (sender is Button)
             {
-                if (!tokenSelected)
-                    return;
-
                 enumMoveDirection = GetMoveDirection(sender);
 
                 if (IllegalMove(sender))
@@ -94,33 +89,28 @@ namespace NeutronGame
 
                 player1Turn ^= true;
                 SetLabelsColor();
-                tokenSelected = false;
+
+                foreach (var button in gameUserControl.GameBoard.Children.OfType<Button>())
+                {
+                    button.Style = gameUserControl.TryFindResource(typeof(Button)) as Style;
+                }
 
             }
             else if (sender is Ellipse)
             {
-                if (!tokenSelected)
-                {
-                    if (player1Turn && (sender as Ellipse).Fill.ToString() == GlobalColors.TokenPlayer2.ToString() ||
-                        !player1Turn && (sender as Ellipse).Fill.ToString() == GlobalColors.TokenPlayer1.ToString())
-                    {
-                        MessageBox.Show("Wrong Piece");
-                        return;
-                    }
+                foreach (var button in gameUserControl.GameBoard.Children.OfType<Button>())
+                    button.Style = gameUserControl.TryFindResource(typeof(Button)) as Style;
 
-                    gameTimer.StartTimer();
-                    tokenSelected = true;
-                    ellipseSelected = sender as Ellipse;
-                    DisplayPieceSelected();
-                }
-                else
+                if (player1Turn && (sender as Ellipse).Fill.ToString() == GlobalColors.TokenPlayer2.ToString() ||
+                        !player1Turn && (sender as Ellipse).Fill.ToString() == GlobalColors.TokenPlayer1.ToString())
                 {
-                    foreach (var button in gameUserControl.GameBoard.Children.OfType<Button>())
-                    {
-                        button.Style = gameUserControl.TryFindResource(typeof(Button)) as Style;
-                    }
-                    tokenSelected = false;
+                    MessageBox.Show("Wrong Piece");
+                    return;
                 }
+
+                gameTimer.StartTimer();
+                ellipseSelected = sender as Ellipse;
+                DisplayPieceSelected();
             }
         }
 
@@ -232,6 +222,9 @@ namespace NeutronGame
                 MessageBox.Show("Wrong move");
                 return true;
             }
+
+            if ((sender as Button).Style != gameUserControl.FindResource("SelectedButton") as Style)
+                return true;
 
             return false;
         }
