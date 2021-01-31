@@ -21,6 +21,31 @@ namespace NeutronGame
             DrawDown(startCol, startRow);
         }
 
+        private Button GetAllowedButton(int x, int y)
+        {
+            Button element = GameUserControl.Instance.GameBoard.Children
+                           .OfType<Button>()
+                           .Where(e => Grid.GetColumn(e) == x && Grid.GetRow(e) == y)
+                           .FirstOrDefault();
+
+            return element;
+        }
+
+        #region If Statment
+
+        private bool CellNotEmpty(int x, int y)
+        {
+            return enumBoard[x, y] != EnumBoard.EmptyCell;
+        }
+
+        private bool DistanceBetweenTokenIs1(int x, int y)
+        {
+            return enumBoard[x, y] != EnumBoard.EmptyCell;
+        }
+
+        #endregion
+
+        #region Draw Down
         private void DrawDown(int startCol, int startRow)
         {
             for (int i = 1; i < 5; i++)
@@ -28,36 +53,30 @@ namespace NeutronGame
                 if (startRow + i > 4)
                     return;
 
-                if (enumBoard[startCol, startRow + i] != EnumBoard.EmptyCell)
+                if (DistanceBetweenTokenIs1(startCol, startRow + 1))
+                    return;
+
+                if (CellNotEmpty(startCol, startRow + i))
                 {
-                    var elements = GameUserControl.Instance.GameBoard.Children.Cast<Button>().
-                                First(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow + i - 1);
-
-
-                    var eelement = GameUserControl.Instance.GameBoard.Children
-                           .OfType<Button>()
-                           .Where(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow + i - 1)
-                           .FirstOrDefault();
-
-                    eelement.Style = GameUserControl.Instance.FindResource("SelectedButton") as Style;
-
+                    GetAllowedButton(startCol, startRow + i - 1).Style = GameUserControl.Instance.FindResource("SelectedButton") as Style;
                     return;
                 }
 
-                if (startRow + i == 4)
+                if (BottomWallHited(startRow, i))
                 {
-                    var eelement = GameUserControl.Instance.GameBoard.Children
-                           .OfType<Button>()
-                           .Where(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow + i)
-                           .FirstOrDefault();
-
-                    eelement.Style = GameUserControl.Instance.FindResource("SelectedButton") as Style;
-
+                    GetAllowedButton(startCol, startRow + i).Style = GameUserControl.Instance.FindResource("SelectedButton") as Style;
                     return;
                 }
             }
         }
 
+        private bool BottomWallHited(int startRow, int i)
+        {
+            return startRow + i == 4;
+        }
+        #endregion
+
+        #region Draw Up
         private void DrawUp(int startCol, int startRow)
         {
             for (int i = 1; i < 5; i++)
@@ -65,30 +84,28 @@ namespace NeutronGame
                 if (startRow - i < 0)
                     return;
 
-                if (enumBoard[startCol, startRow - i] != EnumBoard.EmptyCell)
+                if (DistanceBetweenTokenIs1(startCol, startRow - 1))
+                    return;
+
+                if (CellNotEmpty(startCol, startRow - i))
                 {
-                    var eelement = GameUserControl.Instance.GameBoard.Children
-                           .OfType<Button>()
-                           .Where(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow - i + 1)
-                           .FirstOrDefault();
-
-                    eelement.Style = GameUserControl.Instance.FindResource("SelectedButton") as Style;
-
+                    GetAllowedButton(startCol, startRow - i + 1).Style = GameUserControl.Instance.FindResource("SelectedButton") as Style;
                     return;
                 }
 
-                if (startRow - i == 0)
+                if (TopWallHited(startRow, i))
                 {
-                    var eelement = GameUserControl.Instance.GameBoard.Children
-                           .OfType<Button>()
-                           .Where(e => Grid.GetColumn(e) == startCol && Grid.GetRow(e) == startRow - i)
-                           .FirstOrDefault();
-
-                    eelement.Style = GameUserControl.Instance.FindResource("SelectedButton") as Style;
-
+                    GetAllowedButton(startCol, startRow - i).Style = GameUserControl.Instance.FindResource("SelectedButton") as Style;
                     return;
                 }
             }
         }
+
+        private static bool TopWallHited(int startRow, int i)
+        {
+            return startRow - i == 0;
+        }
+
+        #endregion 
     }
 }

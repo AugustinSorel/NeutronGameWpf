@@ -90,28 +90,34 @@ namespace NeutronGame
                 player1Turn ^= true;
                 SetLabelsColor();
 
-                foreach (var button in gameUserControl.GameBoard.Children.OfType<Button>())
-                {
-                    button.Style = gameUserControl.TryFindResource(typeof(Button)) as Style;
-                }
-
+                SetAllButtonsStyleToDefault();
             }
             else if (sender is Ellipse)
             {
-                foreach (var button in gameUserControl.GameBoard.Children.OfType<Button>())
-                    button.Style = gameUserControl.TryFindResource(typeof(Button)) as Style;
-
-                if (player1Turn && (sender as Ellipse).Fill.ToString() == GlobalColors.TokenPlayer2.ToString() ||
-                        !player1Turn && (sender as Ellipse).Fill.ToString() == GlobalColors.TokenPlayer1.ToString())
-                {
-                    MessageBox.Show("Wrong Piece");
+                if (Player1SelectPlayer2Token(sender) ||Player2SelectPlayer1Token(sender))
                     return;
-                }
 
+                SetAllButtonsStyleToDefault();
                 gameTimer.StartTimer();
                 ellipseSelected = sender as Ellipse;
                 DisplayPieceSelected();
             }
+        }
+
+        private void SetAllButtonsStyleToDefault()
+        {
+            foreach (var button in gameUserControl.GameBoard.Children.OfType<Button>())
+                button.Style = gameUserControl.TryFindResource(typeof(Button)) as Style;
+        }
+
+        private bool Player2SelectPlayer1Token(object sender)
+        {
+            return !player1Turn && (sender as Ellipse).Fill.ToString() == GlobalColors.TokenPlayer1.ToString();
+        }
+
+        private bool Player1SelectPlayer2Token(object sender)
+        {
+            return player1Turn && (sender as Ellipse).Fill.ToString() == GlobalColors.TokenPlayer2.ToString();
         }
 
         private void DisplayPieceSelected()
@@ -148,11 +154,16 @@ namespace NeutronGame
 
             if ((sender as Button).Style != gameUserControl.FindResource("SelectedButton") as Style)
             {
-                (sender as Button).Style = gameUserControl.FindResource("WrongButton") as Style;
+                DisplayWrongCellClicked(sender);
                 return true;
             }
 
             return false;
+        }
+
+        private void DisplayWrongCellClicked(object sender)
+        {
+            (sender as Button).Style = gameUserControl.FindResource("WrongButton") as Style;
         }
 
         #endregion
