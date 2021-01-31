@@ -33,6 +33,7 @@ namespace NeutronGame
         #region Game Fields
 
         private bool player1Turn;
+        private bool neutronMoved;
         private GameTimer gameTimer;
         private Ellipse ellipseSelected;
         EnumBoard[,] enumBoard;
@@ -69,6 +70,7 @@ namespace NeutronGame
         {
             enumBoard = new EnumBoard[5, 5];
             player1Turn = true;
+            neutronMoved = true;
             gameTimer = new GameTimer(gameUserControl);
         }
         #endregion
@@ -79,15 +81,24 @@ namespace NeutronGame
         {
             if (sender is Button)
             {
-                enumMoveDirection = GetMoveDirection(sender);
-
                 if (IllegalMove(sender))
                     return;
+
+                if (neutronMoved)
+                {
+                    player1Turn ^= true;
+                    neutronMoved = false;
+                }
+                else if(!neutronMoved)
+                {
+                    neutronMoved = true;
+                }
+
+                enumMoveDirection = GetMoveDirection(sender);
 
                 UpdateEnumBoard(sender);
                 new MoveToken(sender, ellipseSelected, enumMoveDirection);
 
-                player1Turn ^= true;
                 SetLabelsColor();
 
                 SetAllButtonsStyleToDefault();
@@ -97,10 +108,20 @@ namespace NeutronGame
                 if (Player1SelectPlayer2Token(sender) ||Player2SelectPlayer1Token(sender))
                     return;
 
-                SetAllButtonsStyleToDefault();
-                gameTimer.StartTimer();
-                ellipseSelected = sender as Ellipse;
-                DisplayPieceSelected();
+                if (neutronMoved && (sender as Ellipse).Style != gameUserControl.FindResource("EllipseNeutron") as Style)
+                {
+                    SetAllButtonsStyleToDefault();
+                    gameTimer.StartTimer();
+                    ellipseSelected = sender as Ellipse;
+                    DisplayPieceSelected();
+                }
+                else if (!neutronMoved && (sender as Ellipse).Style == gameUserControl.FindResource("EllipseNeutron") as Style)
+                {
+                    SetAllButtonsStyleToDefault();
+                    gameTimer.StartTimer();
+                    ellipseSelected = sender as Ellipse;
+                    DisplayPieceSelected();
+                }
             }
         }
 
@@ -148,7 +169,7 @@ namespace NeutronGame
 
             if (enumBoard[col, row] != EnumBoard.EmptyCell)
             {
-                MessageBox.Show("Wrong move");
+                DisplayWrongCellClicked(sender);
                 return true;
             }
 
