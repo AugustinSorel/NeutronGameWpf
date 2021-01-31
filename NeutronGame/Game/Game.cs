@@ -224,7 +224,10 @@ namespace NeutronGame
             }
 
             if ((sender as Button).Style != gameUserControl.FindResource("SelectedButton") as Style)
+            {
+                (sender as Button).Style = gameUserControl.FindResource("WrongButton") as Style;
                 return true;
+            }
 
             return false;
         }
