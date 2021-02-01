@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -83,6 +84,8 @@ namespace NeutronGame
                 if (IllegalMove(sender))
                     return;
 
+                UpdateEnumBoard(sender);
+
                 if (neutronMoved)
                 {
                     player1Turn ^= true;
@@ -95,12 +98,12 @@ namespace NeutronGame
 
                 enumMoveDirection = GetMoveDirection(sender);
 
-                UpdateEnumBoard(sender);
                 new MoveToken(sender, ellipseSelected, enumMoveDirection);
 
                 SetLabelsColor();
 
                 SetAllButtonsStyleToDefault();
+                CheckEndGame();
             }
             else if (sender is Ellipse)
             {
@@ -120,6 +123,30 @@ namespace NeutronGame
                     gameTimer.StartTimer();
                     ellipseSelected = sender as Ellipse;
                     DisplayPieceSelected();
+                }
+            }
+        }
+
+        private void CheckEndGame()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    if (i == 0)
+                    {
+                        if (enumBoard[j, i] == EnumBoard.NeutronToken)
+                        {
+                            MessageBox.Show("Player1 Won !!!!");
+                        }
+                    }
+                    else if (i == 4)
+                    {
+                        if (enumBoard[j, i] == EnumBoard.NeutronToken)
+                        {
+                            MessageBox.Show("Player2 Won !!!!");
+                        }
+                    }
                 }
             }
         }
@@ -155,10 +182,17 @@ namespace NeutronGame
         {
             enumBoard[Grid.GetColumn(ellipseSelected), Grid.GetRow(ellipseSelected)] = EnumBoard.EmptyCell;
 
-            if (player1Turn)
-                enumBoard[Grid.GetColumn(sender as Button), Grid.GetRow(sender as Button)] = EnumBoard.Player1Token;
+            if (neutronMoved)
+            {
+                if (player1Turn)
+                    enumBoard[Grid.GetColumn(sender as Button), Grid.GetRow(sender as Button)] = EnumBoard.Player1Token;
+                else
+                    enumBoard[Grid.GetColumn(sender as Button), Grid.GetRow(sender as Button)] = EnumBoard.Player2Token;
+            }
             else
-                enumBoard[Grid.GetColumn(sender as Button), Grid.GetRow(sender as Button)] = EnumBoard.Player2Token;
+            {
+                enumBoard[Grid.GetColumn(sender as Button), Grid.GetRow(sender as Button)] = EnumBoard.NeutronToken;
+            }
         }
 
         private bool IllegalMove(object sender)
