@@ -61,7 +61,6 @@
     <Compile Include="Game\EnumMoveDirection.cs" />
     <Compile Include="Game\GameTimer.cs" />
     <Compile Include="Game\Game.cs" />
-    <Compile Include="Game\HandleEllipseClick.cs" />
     <Compile Include="Game\InitGameBoard.cs" />
     <Compile Include="Game\MoveToken.cs" />
     <Compile Include="Game\TokenMovement.cs" />
@@ -69,6 +68,7 @@
     <Compile Include="InputUserControl\HandleButtonPlayClick.cs" />
     <Compile Include="EventHandler\Token\Token.cs" />
     <Compile Include="Players\Players.cs" />
+    <Compile Include="Test.cs" />
     <Compile Include="TopBarUserControl\TopBarUserControl.xaml.cs">
       <DependentUpon>TopBarUserControl.xaml</DependentUpon>
     </Compile>
