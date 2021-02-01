@@ -47,8 +47,14 @@ namespace NeutronGame
         {
             this.gameUserControl = gameUserControl;
             SetGameVariable();
+            ResetGameBoard();
             InitGameBoard();
             SetLabelsColor();
+        }
+
+        private void ResetGameBoard()
+        {
+            gameUserControl.GameBoard.Children.RemoveRange(25, 11);
         }
 
         private void SetLabelsColor()
@@ -138,6 +144,8 @@ namespace NeutronGame
                         if (enumBoard[j, i] == EnumBoard.NeutronToken)
                         {
                             MessageBox.Show("Player1 Won !!!!");
+                            CleanBoard();
+                            return;
                         }
                     }
                     else if (i == 4)
@@ -145,10 +153,17 @@ namespace NeutronGame
                         if (enumBoard[j, i] == EnumBoard.NeutronToken)
                         {
                             MessageBox.Show("Player2 Won !!!!");
+                            CleanBoard();
+                            return;
                         }
                     }
                 }
             }
+        }
+
+        private void CleanBoard()
+        {
+            StartNewGame(gameUserControl);
         }
 
         private void SetAllButtonsStyleToDefault()
