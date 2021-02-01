@@ -139,7 +139,7 @@ namespace NeutronGame
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    if (i == 0)
+                    if (i == 0) // Neutron hited the top wall
                     {
                         if (enumBoard[j, i] == EnumBoard.NeutronToken)
                         {
@@ -148,7 +148,7 @@ namespace NeutronGame
                             return;
                         }
                     }
-                    else if (i == 4)
+                    else if (i == 4) // Neutron hited the bottom wall
                     {
                         if (enumBoard[j, i] == EnumBoard.NeutronToken)
                         {
@@ -156,6 +156,40 @@ namespace NeutronGame
                             CleanBoard();
                             return;
                         }
+                    }
+                    else if (enumBoard[4, i] == EnumBoard.NeutronToken)  // Neutron hitted the right wall
+                    {
+                        if (enumBoard[4, i + 1] != EnumBoard.EmptyCell && enumBoard[4, i - 1] != EnumBoard.EmptyCell && // hor
+                            enumBoard[4 - 1, i] != EnumBoard.EmptyCell && // verti
+                            enumBoard[4 - 1, i + 1] != EnumBoard.EmptyCell && enumBoard[4 - 1, i - 1] != EnumBoard.EmptyCell) // dig
+                        {
+                            MessageBox.Show("Neutron is trapped");
+                            return;
+                        }
+                    }
+                    else if (enumBoard[0, i] == EnumBoard.NeutronToken)  // Neutron hitted the left wall
+                    {
+                        if (enumBoard[0, i + 1] != EnumBoard.EmptyCell && enumBoard[0, i - 1] != EnumBoard.EmptyCell && // hor
+                            enumBoard[0 + 1, i] != EnumBoard.EmptyCell && // verti
+                            enumBoard[0 + 1, i - 1] != EnumBoard.EmptyCell && enumBoard[0 + 1, i + 1] != EnumBoard.EmptyCell) // dig
+                        {
+                            MessageBox.Show("Neutron is trapped");
+                            return;
+                        }
+                    }
+                    else if (j > 0 && i > 0 && j < 4 && i < 4) // neutron trapped in the middle of the game board
+                    {
+                        if (enumBoard[j, i] == EnumBoard.NeutronToken)
+                        {
+                            if (enumBoard[j, i + 1] != EnumBoard.EmptyCell && enumBoard[j, i - 1] != EnumBoard.EmptyCell && // hor
+                                enumBoard[j + 1, i] != EnumBoard.EmptyCell && enumBoard[j - 1, i] != EnumBoard.EmptyCell && // verti
+                                enumBoard[j - 1, i + 1] != EnumBoard.EmptyCell && enumBoard[j + 1, i + 1] != EnumBoard.EmptyCell && // dig up
+                                enumBoard[j + 1, i - 1] != EnumBoard.EmptyCell && enumBoard[j - 1, i - 1] != EnumBoard.EmptyCell)   // dig down
+                            {
+                                MessageBox.Show("Neutron is trapped");
+                                return;
+                            }
+                        }                        
                     }
                 }
             }
