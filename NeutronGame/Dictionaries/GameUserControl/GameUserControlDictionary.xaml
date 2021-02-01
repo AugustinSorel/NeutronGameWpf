@@ -36,13 +36,21 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
+                    <Grid>
+
                     <Border Name="border" 
-                        BorderThickness="2"
-                        BorderBrush="#2ecc71" 
-                        Background="#353b48">
+                            BorderThickness="1"
+                            BorderBrush="#2ecc71" 
+                            Background="#353b48">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
-                    
+
+                        <Ellipse Fill="{Binding Source={x:Static local:GlobalColors.LightGray}}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                             Width="10" Height="10" x:Name="Ellipse" Opacity="0.3">
+                            
+                        </Ellipse>
+
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

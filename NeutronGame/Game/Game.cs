@@ -164,6 +164,7 @@ namespace NeutronGame
                             enumBoard[4 - 1, i + 1] != EnumBoard.EmptyCell && enumBoard[4 - 1, i - 1] != EnumBoard.EmptyCell) // dig
                         {
                             MessageBox.Show("Neutron is trapped");
+                            CleanBoard();
                             return;
                         }
                     }
@@ -174,6 +175,7 @@ namespace NeutronGame
                             enumBoard[0 + 1, i - 1] != EnumBoard.EmptyCell && enumBoard[0 + 1, i + 1] != EnumBoard.EmptyCell) // dig
                         {
                             MessageBox.Show("Neutron is trapped");
+                            CleanBoard();
                             return;
                         }
                     }
@@ -187,6 +189,7 @@ namespace NeutronGame
                                 enumBoard[j + 1, i - 1] != EnumBoard.EmptyCell && enumBoard[j - 1, i - 1] != EnumBoard.EmptyCell)   // dig down
                             {
                                 MessageBox.Show("Neutron is trapped");
+                                CleanBoard();
                                 return;
                             }
                         }                        
