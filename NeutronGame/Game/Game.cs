@@ -91,45 +91,38 @@ namespace NeutronGame
                     return;
 
                 UpdateEnumBoard(sender);
-
-                if (neutronMoved)
-                {
-                    player1Turn ^= true;
-                    neutronMoved = false;
-                }
-                else if(!neutronMoved)
-                {
-                    neutronMoved = true;
-                }
-
+                SetGameVar();
                 enumMoveDirection = GetMoveDirection(sender);
-
                 new MoveToken(sender, ellipseSelected, enumMoveDirection);
-
                 SetLabelsColor();
-
                 SetAllButtonsStyleToDefault();
                 CheckEndGame();
             }
             else if (sender is Ellipse)
             {
-                if (Player1SelectPlayer2Token(sender) ||Player2SelectPlayer1Token(sender))
+                if (Player1SelectPlayer2Token(sender) || Player2SelectPlayer1Token(sender))
                     return;
 
-                if (neutronMoved && (sender as Ellipse).Style != gameUserControl.FindResource("EllipseNeutron") as Style)
+                if (NeutronMovedAndEllipseIsNotNeutron(sender) || NeutronNotMovedAndEllipseIsNeutron(sender))
                 {
                     SetAllButtonsStyleToDefault();
                     gameTimer.StartTimer();
                     ellipseSelected = sender as Ellipse;
                     DisplayPieceSelected();
                 }
-                else if (!neutronMoved && (sender as Ellipse).Style == gameUserControl.FindResource("EllipseNeutron") as Style)
-                {
-                    SetAllButtonsStyleToDefault();
-                    gameTimer.StartTimer();
-                    ellipseSelected = sender as Ellipse;
-                    DisplayPieceSelected();
-                }
+            }
+        }
+
+        private void SetGameVar()
+        {
+            if (neutronMoved)
+            {
+                player1Turn ^= true;
+                neutronMoved = false;
+            }
+            else if (!neutronMoved)
+            {
+                neutronMoved = true;
             }
         }
 
@@ -209,20 +202,32 @@ namespace NeutronGame
                 button.Style = gameUserControl.TryFindResource(typeof(Button)) as Style;
         }
 
+        #region Handle Ellipse Click
         private bool Player2SelectPlayer1Token(object sender)
         {
             return !player1Turn && (sender as Ellipse).Fill.ToString() == GlobalColors.TokenPlayer1.ToString();
         }
-
+        
         private bool Player1SelectPlayer2Token(object sender)
         {
             return player1Turn && (sender as Ellipse).Fill.ToString() == GlobalColors.TokenPlayer2.ToString();
         }
-
+        
+        private bool NeutronNotMovedAndEllipseIsNeutron(object sender)
+        {
+            return !neutronMoved && (sender as Ellipse).Style == gameUserControl.FindResource("EllipseNeutron") as Style;
+        }
+        
+        private bool NeutronMovedAndEllipseIsNotNeutron(object sender)
+        {
+            return neutronMoved && (sender as Ellipse).Style != gameUserControl.FindResource("EllipseNeutron") as Style;
+        }
+        
         private void DisplayPieceSelected()
         {
             new DisplayAvailableChoices(ellipseSelected, enumBoard);
         }
+        #endregion
 
         private EnumMoveDirection GetMoveDirection(object sender)
         {
