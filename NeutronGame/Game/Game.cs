@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -36,6 +37,7 @@ namespace NeutronGame
         private bool neutronMoved;
         private GameTimer gameTimer;
         private Ellipse ellipseSelected;
+        private bool ai;
         EnumBoard[,] enumBoard;
         EnumMoveDirection enumMoveDirection;
 
@@ -43,9 +45,10 @@ namespace NeutronGame
 
         #region Start New Game
 
-        public void StartNewGame(GameUserControl gameUserControl)
+        public void StartNewGame(GameUserControl gameUserControl, string content)
         {
             this.gameUserControl = gameUserControl;
+            ai = content.Trim().ToLower() == "ai";
             SetGameVariable();
             ResetGameBoard();
             InitGameBoard();
@@ -97,6 +100,102 @@ namespace NeutronGame
                 SetLabelsColor();
                 SetAllButtonsStyleToDefault();
                 CheckEndGame();
+
+                if (ai && !player1Turn && !neutronMoved)
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                       Ellipse tokenNeutron;
+                        // Display neutron available
+                        for (int j = 0; j < 5; j++)
+                        {
+                            if (enumBoard[j, i] == EnumBoard.NeutronToken) 
+                            {
+                                tokenNeutron = GameUserControl.Instance.GameBoard.Children
+                                .OfType<Ellipse>()
+                                .Where(e => Grid.GetColumn(e) == j && Grid.GetRow(e) == i)
+                                .FirstOrDefault();
+
+                                SetAllButtonsStyleToDefault();
+                                ellipseSelected = tokenNeutron;
+                                DisplayPieceSelected();
+                                break;
+                            }
+                        }
+                    }
+                    // move the neutron
+                    byte index = 0;
+                    List<int> numberOfAvailableMove = new List<int>();
+                    foreach (var item in gameUserControl.GameBoard.Children.OfType<Button>())
+                    {
+                        if (item.Style == gameUserControl.FindResource("SelectedButton") as Style)
+                        {
+                            // AI can Win
+                            if (Grid.GetRow(item) == 0)
+                            {
+                                HandleTokenClick(item);
+                                return;
+                            }
+                            numberOfAvailableMove.Add(index);
+                        }
+                        index++;
+                    }
+                    // play the neutron randomly
+                    Random random = new Random();
+                    int indexMove = random.Next(0, numberOfAvailableMove.Count);
+                    index = 0;
+                    foreach (var item in gameUserControl.GameBoard.Children.OfType<Button>())
+                    {
+                        if (index == numberOfAvailableMove[indexMove])
+                        {
+                            HandleTokenClick(item);
+                            break;
+                        }
+                        index++;
+                    }
+
+                    // selected a random token from player2
+                    index = 0;
+                    Random random2 = new Random();
+                    int indexMove2 = random.Next(0, 4);
+                    foreach (var item in gameUserControl.GameBoard.Children.OfType<Ellipse>())
+                    {
+                        if (item.Style == gameUserControl.FindResource("EllipsePlayer2") as Style)
+                        {
+                            if (index == indexMove2)
+                            {
+                                HandleTokenClick(item);
+                            }
+                            index++;
+                        }
+                    }
+
+                    // populate the random list of move for the token
+                    index = 0;
+                    List<int> numberOfAvailableMove2 = new List<int>();
+                    foreach (var item in gameUserControl.GameBoard.Children.OfType<Button>())
+                    {
+                        if (item.Style == gameUserControl.FindResource("SelectedButton") as Style)
+                        {
+                            numberOfAvailableMove2.Add(index);
+                        }
+                        index++;
+                    }
+
+                    // play the token randomly
+                    Random random3 = new Random();
+                    int indexMove3 = random.Next(0, numberOfAvailableMove2.Count);
+                    index = 0;
+                    foreach (var item in gameUserControl.GameBoard.Children.OfType<Button>())
+                    {
+                        if (index == numberOfAvailableMove2[indexMove3])
+                        {
+                            HandleTokenClick(item);
+                            break;
+                        }
+                        index++;
+                    }
+                }
             }
             else if (sender is Ellipse)
             {
@@ -136,7 +235,7 @@ namespace NeutronGame
                     {
                         if (enumBoard[j, i] == EnumBoard.NeutronToken)
                         {
-                            MessageBox.Show("Player1 Won !!!!");
+                            MessageBox.Show("Player2 Won !!!!");
                             CleanBoard();
                             return;
                         }
@@ -145,7 +244,7 @@ namespace NeutronGame
                     {
                         if (enumBoard[j, i] == EnumBoard.NeutronToken)
                         {
-                            MessageBox.Show("Player2 Won !!!!");
+                            MessageBox.Show("Player1 Won !!!!");
                             CleanBoard();
                             return;
                         }
@@ -193,7 +292,7 @@ namespace NeutronGame
 
         private void CleanBoard()
         {
-            StartNewGame(gameUserControl);
+            StartNewGame(gameUserControl, gameUserControl.LabelPlayer2Name.Content.ToString());
         }
 
         private void SetAllButtonsStyleToDefault()
