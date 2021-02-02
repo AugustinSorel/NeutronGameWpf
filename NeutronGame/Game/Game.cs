@@ -136,10 +136,31 @@ namespace NeutronGame
                                 HandleTokenClick(item);
                                 return;
                             }
-                            numberOfAvailableMove.Add(index);
+                            // add best move for neutron
+
+                            // left here
+
+                            for (int i = 1; i < 5; i++)
+                            {
+                                if (Grid.GetRow(item) + i > 4)
+                                    break;
+
+                                if (!BottomWallHited(Grid.GetRow(item) + i, i))
+                                {
+                                    numberOfAvailableMove.Add(index);
+                                    break;
+                                }
+                            }
+                            
                         }
                         index++;
                     }
+
+                    foreach (var item in numberOfAvailableMove)
+                    {
+                        MessageBox.Show(item.ToString());
+                    }
+
                     // play the neutron randomly
                     Random random = new Random();
                     int indexMove = random.Next(0, numberOfAvailableMove.Count);
@@ -210,6 +231,11 @@ namespace NeutronGame
                     DisplayPieceSelected();
                 }
             }
+        }
+
+        private bool BottomWallHited(int startRow, int i)
+        {
+            return startRow + i == 4;
         }
 
         private void SetGameVar()
