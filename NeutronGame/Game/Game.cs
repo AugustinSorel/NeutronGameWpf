@@ -136,24 +136,20 @@ namespace NeutronGame
                                 HandleTokenClick(item);
                                 return;
                             }
-                            // add best move for neutron
-
-                            // left here
-
-                            for (int i = 1; i < 5; i++)
-                            {
-                                if (Grid.GetRow(item) + i > 4)
-                                    break;
-
-                                if (!BottomWallHited(Grid.GetRow(item) + i, i))
-                                {
-                                    numberOfAvailableMove.Add(index);
-                                    break;
-                                }
-                            }
-                            
+                            numberOfAvailableMove.Add(index);  
                         }
                         index++;
+                    }
+
+                    for (int i = 0; i < numberOfAvailableMove.Count; i++)
+                    {
+                        // remove sucidal play
+                        if (numberOfAvailableMove[i] > 19)
+                        {
+                            numberOfAvailableMove.Remove(numberOfAvailableMove[i]);
+                            break;
+                        }
+                        
                     }
 
                     foreach (var item in numberOfAvailableMove)

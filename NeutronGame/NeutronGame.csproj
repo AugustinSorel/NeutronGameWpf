@@ -68,7 +68,6 @@
     <Compile Include="InputUserControl\HandleButtonPlayClick.cs" />
     <Compile Include="EventHandler\Token\Token.cs" />
     <Compile Include="Players\Players.cs" />
-    <Compile Include="Test.cs" />
     <Compile Include="TopBarUserControl\TopBarUserControl.xaml.cs">
       <DependentUpon>TopBarUserControl.xaml</DependentUpon>
     </Compile>
