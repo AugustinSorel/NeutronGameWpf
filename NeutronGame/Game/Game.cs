@@ -131,7 +131,7 @@ namespace NeutronGame
                         if (item.Style == gameUserControl.FindResource("SelectedButton") as Style)
                         {
                             // AI can Win
-                            if (Grid.GetRow(item) == 0)
+                            if (Grid.GetRow(item) == 4)
                             {
                                 HandleTokenClick(item);
                                 return;
@@ -144,17 +144,11 @@ namespace NeutronGame
                     for (int i = 0; i < numberOfAvailableMove.Count; i++)
                     {
                         // remove sucidal play
-                        if (numberOfAvailableMove[i] > 19)
+                        if (numberOfAvailableMove[i] < 5)
                         {
                             numberOfAvailableMove.Remove(numberOfAvailableMove[i]);
                             break;
                         }
-                        
-                    }
-
-                    foreach (var item in numberOfAvailableMove)
-                    {
-                        MessageBox.Show(item.ToString());
                     }
 
                     // play the neutron randomly
@@ -257,7 +251,7 @@ namespace NeutronGame
                     {
                         if (enumBoard[j, i] == EnumBoard.NeutronToken)
                         {
-                            MessageBox.Show("Player2 Won !!!!");
+                            MessageBox.Show("Player1 Won !!!!");
                             CleanBoard();
                             return;
                         }
@@ -266,7 +260,7 @@ namespace NeutronGame
                     {
                         if (enumBoard[j, i] == EnumBoard.NeutronToken)
                         {
-                            MessageBox.Show("Player1 Won !!!!");
+                            MessageBox.Show("Player2 Won !!!!");
                             CleanBoard();
                             return;
                         }
