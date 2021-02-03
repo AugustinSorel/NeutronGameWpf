@@ -35,6 +35,7 @@ and then one of their soldiers (except on the first player's first turn where th
 # Previews
 
 ## AI
+* To use the Ai, change the player2 name with ai in the texbox. 
 
 ![](https://github.com/AugustinSorel/NeutronGameWpf/blob/master/Ai.gif)
 
